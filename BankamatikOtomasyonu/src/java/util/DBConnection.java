@@ -12,6 +12,7 @@ import java.sql.DriverManager;
  * @author byosmandogan
  */
 public abstract class DBConnection {
+    
     public Connection connect(){
         Connection c = null;
         try {
