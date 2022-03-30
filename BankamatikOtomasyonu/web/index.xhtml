@@ -8,9 +8,13 @@
     </h:head>
     <h:body>
         
-        #{hesapBean.list}
-        
+        <h:form>
+            hesapno <h:inputText value="#{hesapBean.entity.hesapno}"/>
+            bakiye <h:inputText value="#{hesapBean.entity.bakiye}"/>
+            <h:commandButton action="#{hesapBean.create}" value="Kaydet"/>
+        </h:form>
 
+        
     </h:body>
 </html>
 
