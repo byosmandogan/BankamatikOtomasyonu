@@ -43,11 +43,12 @@ public class HesapDAO extends DBConnection{
         List<Hesap> hesapList =new ArrayList<>();
         try {
             Statement st = this.getDb().createStatement();
-            String query ="select*from hesap";
+            String query ="select * from hesap";
             
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
-                hesapList.add(new Hesap(rs.getLong("h_id"),rs.getInt("hesapno"),rs.getDouble("bakiye"),rs.getTimestamp("created"),rs.getTimestamp("updated")));
+                System.out.println(rs.getLong("h_id"));
+                hesapList.add(new Hesap(rs.getLong("h_id"),rs.getString("hesapno"),rs.getDouble("bakiye"),rs.getTimestamp("created"),rs.getTimestamp("updated")));
             }
 
         } catch (Exception ex) {

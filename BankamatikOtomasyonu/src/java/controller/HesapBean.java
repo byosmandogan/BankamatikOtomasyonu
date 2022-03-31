@@ -53,13 +53,17 @@ public class HesapBean implements Serializable {
 
     public List<Hesap> getList() {
         this.list= this.getDao().getHesapList();
+        System.out.println("list ....");
+        for (int i = 0; i < this.list.size(); i++) {
+            System.out.println(this.list.get(i).getH_id());
+        }
         return list;
     }
 
     public void setList(List<Hesap> list) {
         this.list = list;
     }
-    
+
     public void create(){
         this.entity.setCreated(new Timestamp(System.currentTimeMillis()));
         this.getDao().createHesap(entity);
