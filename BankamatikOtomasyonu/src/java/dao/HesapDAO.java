@@ -33,7 +33,7 @@ public class HesapDAO extends DBConnection{
         try {
             
             Statement st = this.getDb().createStatement();
-            String query = "delete from hesap where id="+c.getH_id();
+            String query = "delete from hesap where h_id="+c.getH_id();
             int r =st.executeUpdate(query);
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
