@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Hesap İslemleri</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton action="/index" value="Home" /><!-- comment -->
+        </h:form>
+        <h:form>
+            hesapno <h:inputText value="#{hesapBean.entity.hesapno}"/>
+            bakiye <h:inputText value="#{hesapBean.entity.bakiye}"/>
+            <h:commandButton action="#{hesapBean.create}" value="Kaydet"/>
+        </h:form>
+        
+        <hr />
+        <hr />
+
+        <h:form>        
+            <h:dataTable value="#{hesapBean.list}" var="c">
+                <h:column>
+                    <f:facet name="Header">ID</f:facet>
+                        #{c.h_id}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Hesap No</f:facet>
+                        #{c.hesapno}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Bakiye</f:facet>
+                        #{c.bakiye}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">CREATED</f:facet>
+                        #{c.created}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">UPDATED</f:facet>
+                        #{c.updated}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Delette</f:facet>
+                    <h:commandButton action="#{hesapBean.delete(c)}" value="Sil"/>
+                </h:column>
+            </h:dataTable>
+
+        </h:form> 
+    </h:body>
+</html>
+
