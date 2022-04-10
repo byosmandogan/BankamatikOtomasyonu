@@ -14,6 +14,8 @@
             hesapno <h:inputText value="#{hesapBean.entity.hesapno}"/>
             bakiye <h:inputText value="#{hesapBean.entity.bakiye}"/>
             <h:commandButton action="#{hesapBean.create}" value="Kaydet"/>
+            <h:commandButton rendered="#{hesapBean.entity.h_id!=1}" action="#{hesapBean.update()}" value="Update" />
+            <h:commandButton rendered="#{hesapBean.entity.h_id!=0}" action="#{hesapBean.clear()}" value="Clear" />
         </h:form>
         
         <hr />
@@ -44,6 +46,7 @@
                 <h:column>
                     <f:facet name="Header">Delette</f:facet>
                     <h:commandButton action="#{hesapBean.delete(c)}" value="Sil"/>
+                    <h:commandButton action="#{hesapBean.setEntity(c)}" value="Update" />
                 </h:column>
             </h:dataTable>
 

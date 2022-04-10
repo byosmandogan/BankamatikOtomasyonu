@@ -67,5 +67,16 @@ public class HesapDAO extends DBConnection{
     public void setDb(Connection db) {
         this.db = db;
     }
+
+    public void update(Hesap c) {
+        try {
+
+            Statement st = this.getDb().createStatement();
+            String query = "update hesap set bakiye='" + c.getBakiye() + "' where h_id=" + c.getH_id();
+            st.execute(query);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
 }

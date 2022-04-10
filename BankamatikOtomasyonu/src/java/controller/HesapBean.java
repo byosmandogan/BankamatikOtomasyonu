@@ -19,7 +19,7 @@ import java.util.List;
 @Named(value = "hesapBean")
 @SessionScoped
 public class HesapBean implements Serializable {
-    
+
     private Hesap entity;
     private HesapDAO dao;
     private List<Hesap> list ;
@@ -71,5 +71,12 @@ public class HesapBean implements Serializable {
     }
     public void delete(Hesap c){
         this.getDao().delete(c);
+    }
+    public void update() {
+        this.getDao().update(entity);
+        entity = new Hesap();
+    }
+    public void clear() {
+        entity = new Hesap();
     }
 }
