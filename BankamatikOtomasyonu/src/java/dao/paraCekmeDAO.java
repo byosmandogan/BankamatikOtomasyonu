@@ -35,7 +35,7 @@ public class paraCekmeDAO extends DBConnection {
         try {
 
             Statement st = this.getDb().createStatement();
-            String query = "delete from paracek where h_id=" + c.getId();
+            String query = "delete from paracek where id=" + c.getId();
             int r = st.executeUpdate(query);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

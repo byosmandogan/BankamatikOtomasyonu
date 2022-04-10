@@ -16,30 +16,30 @@ public class Personel {
     private String p_soyad;
     private Integer p_yas;
     private String p_hesapno;
-    private String sifre;
+    private String p_sifre;
     private Timestamp created;
     private Timestamp updated;
 
     public Personel() {
     }
 
-    public Personel(Long id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String sifre, Timestamp created) {
+    public Personel(Long id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String p_sifre, Timestamp created) {
         this.id = id;
         this.p_ad = p_ad;
         this.p_soyad = p_soyad;
         this.p_yas = p_yas;
         this.p_hesapno = p_hesapno;
-        this.sifre = sifre;
+        this.p_sifre = p_sifre;
         this.created = created;
     }
 
-    public Personel(Long id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String sifre, Timestamp created, Timestamp updated) {
+    public Personel(Long id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String p_sifre, Timestamp created, Timestamp updated) {
         this.id = id;
         this.p_ad = p_ad;
         this.p_soyad = p_soyad;
         this.p_yas = p_yas;
         this.p_hesapno = p_hesapno;
-        this.sifre = sifre;
+        this.p_sifre = p_sifre;
         this.created = created;
         this.updated = updated;
     }
@@ -84,12 +84,12 @@ public class Personel {
         this.p_hesapno = p_hesapno;
     }
 
-    public String getSifre() {
-        return sifre;
+    public String getP_sifre() {
+        return p_sifre;
     }
 
-    public void setSifre(String sifre) {
-        this.sifre = sifre;
+    public void setP_sifre(String sifre) {
+        this.p_sifre = sifre;
     }
 
     public Timestamp getCreated() {
@@ -110,7 +110,7 @@ public class Personel {
 
     @Override
     public String toString() {
-        return "Personel{" + "id=" + id + ", p_ad=" + p_ad + ", p_soyad=" + p_soyad + ", p_yas=" + p_yas + ", p_hesapno=" + p_hesapno + ", sifre=" + sifre + ", created=" + created + ", updated=" + updated + '}';
+        return "Personel{" + "id=" + id + ", p_ad=" + p_ad + ", p_soyad=" + p_soyad + ", p_yas=" + p_yas + ", p_hesapno=" + p_hesapno + ", sifre=" + p_sifre + ", created=" + created + ", updated=" + updated + '}';
     }
     
     

@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Personel</title>
     </h:head>
@@ -10,7 +11,56 @@
             <h:form>
                 <h:commandButton action="/index" value="Home" /><!-- comment -->
             </h:form>
-            
+            <hr />
+            <h:form>
+                Personel Adı <h:inputText value="#{personelBean.entity.p_ad}"/>
+                Personel Soyad <h:inputText value="#{personelBean.entity.p_soyad}"/>
+                Personel Yaş <h:inputText value="#{personelBean.entity.p_yas}"/>
+                Personel Sifre <h:inputText value="#{personelBean.entity.p_sifre}"/>
+                Hesap No <h:inputText value="#{personelBean.entity.p_hesapno}"/>
+                <h:commandButton action="#{personelBean.create}" value="Kaydet"/>
+            </h:form>
+            <h:form>        
+                <h:dataTable value="#{personelBean.list}" var="c">
+                    <h:column>
+                        <f:facet name="Header">ID</f:facet>
+                            #{c.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Personel Adı</f:facet>
+                            #{c.p_ad}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Personel Soyad</f:facet>
+                            #{c.p_soyad}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Personel Yas</f:facet>
+                            #{c.p_yas}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Personel Sifre</f:facet>
+                            #{c.p_sifre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Personel Hesap No</f:facet>
+                            #{c.p_hesapno}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">CREATED</f:facet>
+                            #{c.created}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">UPDATED</f:facet>
+                            #{c.updated}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Delette</f:facet>
+                        <h:commandButton action="#{personelBean.delete(c)}" value="Sil"/>
+                    </h:column>
+                </h:dataTable>
+
+            </h:form>
         </h:form>
     </h:body>
 </html>
