@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Guncelle</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h:form>
+            <h:commandButton action="/index" value="Home" /><!-- comment -->
+        </h:form>
+        <h:form>
+           <h:dataTable value="#{guncelleBean.list}" var="c">
+                <h:column>
+                    <f:facet name="Header">ID</f:facet>
+                        #{c.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Hesap No</f:facet>
+                        #{c.p_hesapno}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Ad</f:facet>
+                        #{c.m_ad}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Soyad</f:facet>
+                        #{c.m_soyad}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Sifre</f:facet>
+                        #{c.m_sifre}
+                </h:column>
+               <h:column>
+                    <f:facet name="Header">CREATED</f:facet>
+                        #{c.created}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">UPDATED</f:facet>
+                        #{c.updated}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Delette</f:facet>
+                    <h:commandButton action="#{hesapBean.delete(c)}" value="Sil"/>
+                </h:column>
+            </h:dataTable> 
+            
+            
+        </h:form>
+        
+        <div>TODO write content</div>
+    </body>
+</html>
