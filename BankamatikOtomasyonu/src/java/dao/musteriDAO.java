@@ -1,0 +1,70 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package dao;
+
+import entity.musteri;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import util.DBConnection;
+
+
+/**
+ *
+ * @author Onur
+ */
+public class musteriDAO extends DBConnection {
+    private Connection db;
+     public void createmusteri(musteri c){
+        try {
+            
+            Statement st = this.getDb().createStatement();
+            String query = "insert into musteri (m_ad,m_soyad,m_sifre,m_hesapno) values('"+c.getM_ad()+"','"+c.getM_soyad()+"','"+c.getM_sifre()+"','"+c.getM_hesapno()+"','"+c.getCreated()+"','"+c.getUpdated()+"')";
+            int r =st.executeUpdate(query);
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    public void delete(musteri c){
+        try {
+            
+            Statement st = this.getDb().createStatement();
+            String query = "delete from musteri where id="+c.getM_id();
+            int r =st.executeUpdate(query);
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    public List<musteri> getmusteriList(){
+        List<musteri> musteriList =new ArrayList<>();
+        try {
+            Statement st = this.getDb().createStatement();
+            String query ="select * from musteri";
+            
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                System.out.println(rs.getLong("id"));
+                musteriList.add(new musteri(rs.getLong("id"),rs.getString("m_ad"),rs.getString("m_soyad"),rs.getString("m_sifre"),rs.getString("p_hesapno"),rs.getTimestamp("created"),rs.getTimestamp("updated")));
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return musteriList;
+    }
+
+    public Connection getDb() {
+        if(this.db==null){
+            this.db=this.connect();
+        }
+        return db;
+    }
+
+    public void setDb(java.sql.Connection db) {
+        this.db = db;
+    }
+}
