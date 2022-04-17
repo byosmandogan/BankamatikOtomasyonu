@@ -16,6 +16,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             <h:commandButton action="/index" value="Home" /><!-- comment -->
         </h:form>
         <h:form>
+            hesapno <h:inputText value="#{musteriBean.entity.m_hesapno}"/>
+            musteri ad <h:inputText value="#{musteriBean.entity.m_ad}"/>
+            musteri soyad <h:inputText value="#{musteriBean.entity.m_soyad}"/>
+            musteri sifre <h:inputText value="#{musteriBean.entity.m_sifre}"/>
+            <h:commandButton action="#{musteriBean.create}" value="Kaydet"/>
+            <h:commandButton action="#{musteriBean.update()}" value="Update" />
+            <h:commandButton action="#{musteriBean.clear()}" value="Clear" />
+        </h:form>
+        <h:form>
            <h:dataTable value="#{musteriBean.list}" var="c">
                 <h:column>
                     <f:facet name="Header">ID</f:facet>
@@ -48,6 +57,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 <h:column>
                     <f:facet name="Header">Delette</f:facet>
                     <h:commandButton action="#{musteriBean.delete(c)}" value="Sil"/>
+                    <h:commandButton action="#{musteriBean.setEntity(c)}" value="Update" />
                 </h:column>
             </h:dataTable> 
             

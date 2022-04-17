@@ -9,6 +9,7 @@ import entity.guncelle;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -64,5 +65,20 @@ public class guncelleBean implements Serializable {
 
     public void setList(List<guncelle> list) {
         this.list = list;
+    }
+    public void create(){
+        this.entity.setCreated(new Timestamp(System.currentTimeMillis()));
+        this.getDao().createguncelle(entity);
+        this.entity= new guncelle();
+    }
+    public void delete(guncelle c){
+        this.getDao().delete(c);
+    }
+    public void update() {
+        this.getDao().update(entity);
+        entity = new guncelle();
+    }
+    public void clear() {
+        entity = new guncelle();
     }
 }

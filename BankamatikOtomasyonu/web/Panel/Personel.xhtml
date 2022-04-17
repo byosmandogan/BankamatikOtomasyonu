@@ -19,12 +19,14 @@
                 Personel Sifre <h:inputText value="#{personelBean.entity.p_sifre}"/>
                 Hesap No <h:inputText value="#{personelBean.entity.p_hesapno}"/>
                 <h:commandButton action="#{personelBean.create}" value="Kaydet"/>
+                <h:commandButton action="#{personelBean.update()}" value="Update" />
+                <h:commandButton action="#{personelBean.clear()}" value="Clear" />
             </h:form>
             <h:form>        
                 <h:dataTable value="#{personelBean.list}" var="c">
                     <h:column>
                         <f:facet name="Header">ID</f:facet>
-                            #{c.id}
+                            #{c.p_id}
                     </h:column>
                     <h:column>
                         <f:facet name="Header">Personel Adı</f:facet>
@@ -57,6 +59,7 @@
                     <h:column>
                         <f:facet name="Header">Delette</f:facet>
                         <h:commandButton action="#{personelBean.delete(c)}" value="Sil"/>
+                        <h:commandButton action="#{personelBean.setEntity(c)}" value="Update" />
                     </h:column>
                 </h:dataTable>
 

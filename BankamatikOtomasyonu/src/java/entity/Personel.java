@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @author byosmandogan
  */
 public class Personel {
-    private Long id;
+    private Long p_id;
     private String p_ad;
     private String p_soyad;
     private Integer p_yas;
@@ -23,8 +23,8 @@ public class Personel {
     public Personel() {
     }
 
-    public Personel(Long id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String p_sifre, Timestamp created) {
-        this.id = id;
+    public Personel(Long p_id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String p_sifre, Timestamp created) {
+        this.p_id = p_id;
         this.p_ad = p_ad;
         this.p_soyad = p_soyad;
         this.p_yas = p_yas;
@@ -33,8 +33,8 @@ public class Personel {
         this.created = created;
     }
 
-    public Personel(Long id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String p_sifre, Timestamp created, Timestamp updated) {
-        this.id = id;
+    public Personel(Long p_id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String p_sifre, Timestamp created, Timestamp updated) {
+        this.p_id = p_id;
         this.p_ad = p_ad;
         this.p_soyad = p_soyad;
         this.p_yas = p_yas;
@@ -44,12 +44,12 @@ public class Personel {
         this.updated = updated;
     }
 
-    public Long getId() {
-        return id;
+    public Long getP_id() {
+        return p_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setP_id(Long id) {
+        this.p_id = p_id;
     }
 
     public String getP_ad() {
@@ -110,7 +110,7 @@ public class Personel {
 
     @Override
     public String toString() {
-        return "Personel{" + "id=" + id + ", p_ad=" + p_ad + ", p_soyad=" + p_soyad + ", p_yas=" + p_yas + ", p_hesapno=" + p_hesapno + ", sifre=" + p_sifre + ", created=" + created + ", updated=" + updated + '}';
+        return "Personel{" + "id=" + p_id + ", p_ad=" + p_ad + ", p_soyad=" + p_soyad + ", p_yas=" + p_yas + ", p_hesapno=" + p_hesapno + ", sifre=" + p_sifre + ", created=" + created + ", updated=" + updated + '}';
     }
     
     

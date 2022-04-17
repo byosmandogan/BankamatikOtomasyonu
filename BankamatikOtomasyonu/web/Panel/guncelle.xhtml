@@ -16,6 +16,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             <h:commandButton action="/index" value="Home" /><!-- comment -->
         </h:form>
         <h:form>
+            personel hesap no <h:inputText value="#{guncelleBean.entity.p_hesap_no}"/>
+            musteri ad <h:inputText value="#{guncelleBean.entity.m_ad}"/>
+            musteri soyad <h:inputText value="#{guncelleBean.entity.m_soyad}"/>
+            musteri sifre <h:inputText value="#{guncelleBean.entity.m_sifre}"/>      
+            <h:commandButton action="#{guncelleBean.create}" value="Kaydet"/>
+            <h:commandButton action="#{guncelleBean.update()}" value="Update" />
+            <h:commandButton action="#{guncelleBean.clear()}" value="Clear" />
+        </h:form>
+        <h:form>
            <h:dataTable value="#{guncelleBean.list}" var="c">
                 <h:column>
                     <f:facet name="Header">ID</f:facet>
@@ -48,6 +57,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 <h:column>
                     <f:facet name="Header">Delette</f:facet>
                     <h:commandButton action="#{guncelleBean.delete(c)}" value="Sil"/>
+                    <h:commandButton action="#{guncelleBean.setEntity(c)}" value="Update" />
                 </h:column>
             </h:dataTable> 
             

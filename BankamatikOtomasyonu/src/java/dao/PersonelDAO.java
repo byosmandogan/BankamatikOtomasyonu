@@ -22,7 +22,7 @@ public class PersonelDAO extends DBConnection {
         try {
             
             Statement st = this.getDb().createStatement();
-            String query = "insert into personel (p_ad,p_soyad,p_yas,p_hesapno,sifre) values('"+c.getP_ad()+"','"+c.getP_soyad()+"','"+c.getP_yas()+"','"+c.getP_hesapno()+"','"+c.getP_sifre()+"','"+c.getCreated()+"','"+c.getUpdated()+"')";
+            String query = "insert into personel (p_ad,p_soyad,p_yas,p_hesapno,sifre,created) values('"+c.getP_ad()+"','"+c.getP_soyad()+"','"+c.getP_yas()+"','"+c.getP_hesapno()+"','"+c.getP_sifre()+"','"+c.getCreated()+"')";
             int r =st.executeUpdate(query);
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -32,7 +32,7 @@ public class PersonelDAO extends DBConnection {
         try {
             
             Statement st = this.getDb().createStatement();
-            String query = "delete from personel where p_id="+c.getId();
+            String query = "delete from personel where p_id="+c.getP_id();
             int r =st.executeUpdate(query);
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -65,5 +65,15 @@ public class PersonelDAO extends DBConnection {
 
     public void setDb(java.sql.Connection db) {
         this.db = db;
+    }
+    public void update(Personel c) {
+        try {
+
+            Statement st = this.getDb().createStatement();
+            String query = "update personel set p_sifre='" + c.getP_sifre() + "' where p_id=" + c.getP_id();
+            st.execute(query);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

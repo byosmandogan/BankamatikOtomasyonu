@@ -9,6 +9,7 @@ import entity.musteri;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -62,5 +63,19 @@ public class musteriBean implements Serializable {
         this.list = list;
     }
     
-    
+    public void create(){
+        this.entity.setCreated(new Timestamp(System.currentTimeMillis()));
+        this.getDao().createmusteri(entity);
+        this.entity= new musteri();
+    }
+    public void delete(musteri c){
+        this.getDao().delete(c);
+    }
+    public void update() {
+        this.getDao().update(entity);
+        entity = new musteri();
+    }
+    public void clear() {
+        entity = new musteri();
+    }
 }

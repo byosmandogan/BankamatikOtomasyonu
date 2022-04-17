@@ -10,6 +10,7 @@ import entity.Personel;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -53,14 +54,29 @@ public class PersonelBean implements Serializable {
     public List<Personel> getList() {
         this.list= this.getDao().getPersonelList();
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println(this.list.get(i).getId());
+            System.out.println(this.list.get(i).getP_id());
         }
         return list;
-        
+
     }
 
     public void setList(List<Personel> list) {
         this.list = list;
     }
     
+    public void create(){
+        this.entity.setCreated(new Timestamp(System.currentTimeMillis()));
+        this.getDao().createPersonel(entity);
+        this.entity= new Personel();
+    }
+    public void delete(Personel c){
+        this.getDao().delete(c);
+    }
+    public void update() {
+        this.getDao().update(entity);
+        entity = new Personel();
+    }
+    public void clear() {
+        entity = new Personel();
+    }
 }

@@ -22,7 +22,7 @@ public class guncelleDAO extends DBConnection{
         try {
             
             Statement st = this.getDb().createStatement();
-            String query = "insert into guncelle (m_ad,m_soyad,m_sifre,p_hesapno) values('"+c.getM_ad()+"','"+c.getM_soyad()+"','"+c.getM_sifre()+"','"+c.getP_hesap_no()+"','"+c.getCreated()+"','"+c.getUpdated()+"')";
+            String query = "insert into guncelle (m_ad,m_soyad,m_sifre,p_hesapno,created) values('"+c.getM_ad()+"','"+c.getM_soyad()+"','"+c.getM_sifre()+"','"+c.getP_hesap_no()+"','"+c.getCreated()+"')";
             int r =st.executeUpdate(query);
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -38,6 +38,16 @@ public class guncelleDAO extends DBConnection{
             System.out.println(ex.getMessage());
         }
     }
+    public void update(guncelle c) {
+        try {
+
+            Statement st = this.getDb().createStatement();
+            String query = "update guncelle set m_sifre='" + c.getM_sifre()+ "' where id=" + c.getId();
+            st.execute(query);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public List<guncelle> getguncelleList(){
         List<guncelle> guncelleList =new ArrayList<>();
         try {
@@ -47,7 +57,7 @@ public class guncelleDAO extends DBConnection{
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 System.out.println(rs.getLong("id"));
-                guncelleList.add(new guncelle(rs.getLong("id"),rs.getString("m_ad"),rs.getString("m_soyad"),rs.getString("m_sifre"),rs.getString("p_hesapno"),rs.getTimestamp("created"),rs.getTimestamp("updated")));
+                guncelleList.add(new guncelle(rs.getLong("id"),rs.getString("p_hesapno"),rs.getString("m_ad"),rs.getString("m_soyad"),rs.getString("m_sifre"),rs.getTimestamp("created"),rs.getTimestamp("updated")));
             }
 
         } catch (Exception ex) {
