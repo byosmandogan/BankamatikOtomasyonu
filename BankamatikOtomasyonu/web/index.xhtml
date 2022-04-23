@@ -1,21 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    </h:head>
-    <h:body>
-        <div class="container mt-5">
-        <h:form>
-            <h:commandButton action="/Panel/Hesap" value="Hesap" />
-            <h:commandButton action="/Panel/Personel" value="Personel" />
-            <h:commandButton action="/Panel/guncelle" value="Guncelle" />
-            <h:commandButton action="/Panel/musteri" value="Musteri" />
-        </h:form>
-        </div>
-    </h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml">
+
+    //override
+    <ui:define name="content">
+        
+    </ui:define>
+</ui:composition>
 

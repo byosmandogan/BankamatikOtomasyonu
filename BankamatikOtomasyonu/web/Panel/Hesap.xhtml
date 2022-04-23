@@ -1,17 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Hesap İslemleri</title>
-        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    </h:head>
-    <h:body>
-        <h:form>
-            <h:commandButton styleClass="btn btn-secondary " action="/index" value="&larr; Home" />
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml">
 
-        </h:form>
+    <ui:define name="content">
         <h:form>
             <div class="mb-3">
                 <label class="form-label">Hesapno:</label>
@@ -59,8 +54,7 @@
                     <h:commandButton styleClass="btn btn-primary btn-sm" action="#{hesapBean.setEntity(c)}" value="Update" />
                 </h:column>
             </h:dataTable>
-
         </h:form> 
-    </h:body>
-</html>
+    </ui:define>
+</ui:composition>
 
