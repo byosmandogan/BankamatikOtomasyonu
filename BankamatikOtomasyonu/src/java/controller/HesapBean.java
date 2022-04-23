@@ -55,7 +55,7 @@ public class HesapBean implements Serializable {
         this.list= this.getDao().getHesapList();
         System.out.println("list ....");
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println(this.list.get(i).getH_id());
+            System.out.println(this.list.get(i).getId());
         }
         return list;
     }

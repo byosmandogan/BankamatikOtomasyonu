@@ -5,27 +5,37 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Hesap İslemleri</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     </h:head>
     <h:body>
         <h:form>
-            <h:commandButton action="/index" value="Home" /><!-- comment -->
+            <h:commandButton styleClass="btn btn-secondary " action="/index" value="&larr; Home" />
+
         </h:form>
         <h:form>
-            hesapno <h:inputText value="#{hesapBean.entity.hesapno}"/>
-            bakiye <h:inputText value="#{hesapBean.entity.bakiye}"/>
-            <h:commandButton action="#{hesapBean.create}" value="Kaydet"/>
-            <h:commandButton rendered="#{hesapBean.entity.h_id!=1}" action="#{hesapBean.update()}" value="Update" />
-            <h:commandButton rendered="#{hesapBean.entity.h_id!=0}" action="#{hesapBean.clear()}" value="Clear" />
+            <div class="mb-3">
+                <label class="form-label">Hesapno:</label>
+                <h:inputText styleClass="form-control" value="#{hesapBean.entity.hesapno}"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Bakiye:</label>
+                <h:inputText styleClass="form-control" value="#{hesapBean.entity.bakiye}"/>
+            </div>
+            <div class="mb-3">
+                <h:commandButton styleClass="btn btn-success" action="#{hesapBean.create}" value="Kaydet"/>
+                <h:commandButton styleClass="btn btn-primary" rendered="#{hesapBean.entity.id!=1}" action="#{hesapBean.update()}" value="Update" />
+                <h:commandButton styleClass="btn btn-secondary" rendered="#{hesapBean.entity.id!=0}" action="#{hesapBean.clear()}" value="Clear" />
+            </div>
         </h:form>
-        
+
         <hr />
         <hr />
 
         <h:form>        
-            <h:dataTable value="#{hesapBean.list}" var="c">
+            <h:dataTable styleClass="table table-striped table-hover" value="#{hesapBean.list}" var="c">
                 <h:column>
                     <f:facet name="Header">ID</f:facet>
-                        #{c.h_id}
+                        #{c.id}
                 </h:column>
                 <h:column>
                     <f:facet name="Header">Hesap No</f:facet>
@@ -45,8 +55,8 @@
                 </h:column>
                 <h:column>
                     <f:facet name="Header">Delette</f:facet>
-                    <h:commandButton action="#{hesapBean.delete(c)}" value="Sil"/>
-                    <h:commandButton action="#{hesapBean.setEntity(c)}" value="Update" />
+                    <h:commandButton styleClass="btn btn-danger btn-sm" action="#{hesapBean.delete(c)}" value="Sil"/>
+                    <h:commandButton styleClass="btn btn-primary btn-sm" action="#{hesapBean.setEntity(c)}" value="Update" />
                 </h:column>
             </h:dataTable>
 

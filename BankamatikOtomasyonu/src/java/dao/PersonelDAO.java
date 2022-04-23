@@ -22,7 +22,7 @@ public class PersonelDAO extends DBConnection {
         try {
             
             Statement st = this.getDb().createStatement();
-            String query = "insert into personel (p_ad,p_soyad,p_yas,p_hesapno,sifre,created) values('"+c.getP_ad()+"','"+c.getP_soyad()+"','"+c.getP_yas()+"','"+c.getP_hesapno()+"','"+c.getP_sifre()+"','"+c.getCreated()+"')";
+            String query = "insert into personel (p_ad,p_soyad,p_yas,p_sifre,p_hesapno,created) values('"+c.getP_ad()+"','"+c.getP_soyad()+"','"+c.getP_yas()+"','"+c.getP_sifre()+"','"+c.getP_hesapno()+"','"+c.getCreated()+"')";
             int r =st.executeUpdate(query);
         }catch (Exception ex) {
             System.out.println(ex.getMessage());

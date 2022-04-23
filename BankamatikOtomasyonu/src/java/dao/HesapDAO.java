@@ -33,7 +33,7 @@ public class HesapDAO extends DBConnection{
         try {
             
             Statement st = this.getDb().createStatement();
-            String query = "delete from hesap where h_id="+c.getH_id();
+            String query = "delete from hesap where h_id="+c.getId();
             int r =st.executeUpdate(query);
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -72,7 +72,7 @@ public class HesapDAO extends DBConnection{
         try {
 
             Statement st = this.getDb().createStatement();
-            String query = "update hesap set bakiye='" + c.getBakiye() + "' where h_id=" + c.getH_id();
+            String query = "update hesap set bakiye='" + c.getBakiye() + "' where h_id=" + c.getId();
             st.execute(query);
         } catch (Exception e) {
             System.out.println(e.getMessage());
