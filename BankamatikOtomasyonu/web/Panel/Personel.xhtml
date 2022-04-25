@@ -8,7 +8,7 @@
     <ui:define name="content" >
         <h:form>
             <hr />
-            <h:form>
+            <h:form id="category-Form">
                 <div class="mb-3">
                     <label class="form-label">Personel Adı:</label>
                     <h:inputText styleClass="form-control" value="#{personelBean.entity.p_ad}"/>
@@ -30,11 +30,17 @@
                     <h:inputText styleClass="form-control" value="#{personelBean.entity.p_hesapno}"/>
                 </div>
 
-                <h:commandButton styleClass="btn btn-success" action="#{personelBean.create}" value="Kaydet"/>
-                <h:commandButton styleClass="btn btn-primary" action="#{personelBean.update()}" value="Update" />
-                <h:commandButton styleClass="btn btn-secondary" action="#{personelBean.clear()}" value="Clear" />
+                <h:commandButton styleClass="btn btn-success" action="#{personelBean.create}" value="Kaydet">
+                <f:ajax execute="category-form" render="category-table category-form" />
+                </h:commandButton>
+                <h:commandButton styleClass="btn btn-primary" action="#{personelBean.update()}" value="Update" >
+                    <f:ajax execute="category-form" render="category-table category-form" />
+                </h:commandButton>
+                <h:commandButton styleClass="btn btn-secondary" action="#{personelBean.clear()}" value="Clear" >
+                    <f:ajax execute="category-form" render="category-form" />
+                </h:commandButton>
             </h:form>
-            <h:form>        
+            <h:form id="category-Table">        
                 <h:dataTable styleClass="table table-striped table-hover" value="#{personelBean.list}" var="c">
                     <h:column>
                         <f:facet name="Header">ID</f:facet>
@@ -70,8 +76,12 @@
                     </h:column>
                     <h:column>
                         <f:facet name="Header">Delette</f:facet>
-                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{personelBean.delete(c)}" value="Sil"/>
-                        <h:commandButton styleClass="btn btn-primary btn-sm" action="#{personelBean.setEntity(c)}" value="Update" />
+                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{personelBean.delete(c)}" value="Sil">
+                            <f:ajax execute="category-table" render="category-table category-form" />
+                        </h:commandButton>
+                        <h:commandButton styleClass="btn btn-primary btn-sm" action="#{personelBean.setEntity(c)}" value="Update" >
+                            <f:ajax execute="category-table" render="category-table category-form" />
+                        </h:commandButton>
                     </h:column>
                 </h:dataTable>
 

@@ -7,7 +7,7 @@
                 template="/template.xhtml">
 
     <ui:define name="content">
-        <h:form>
+        <h:form id="category-form">
             <div class="mb-3">
                 <label class="form-label">Hesapno:</label>
                 <h:inputText styleClass="form-control" value="#{hesapBean.entity.hesapno}"/>
@@ -17,16 +17,22 @@
                 <h:inputText styleClass="form-control" value="#{hesapBean.entity.bakiye}"/>
             </div>
             <div class="mb-3">
-                <h:commandButton styleClass="btn btn-success" action="#{hesapBean.create}" value="Kaydet"/>
-                <h:commandButton styleClass="btn btn-primary" rendered="#{hesapBean.entity.id!=1}" action="#{hesapBean.update()}" value="Update" />
-                <h:commandButton styleClass="btn btn-secondary" rendered="#{hesapBean.entity.id!=0}" action="#{hesapBean.clear()}" value="Clear" />
+                <h:commandButton styleClass="btn btn-success" action="#{hesapBean.create}" value="Kaydet">
+                <f:ajax execute="category-form" render="category-table category-form" />
+                </h:commandButton>
+                <h:commandButton styleClass="btn btn-primary" rendered="#{hesapBean.entity.id!=1}" action="#{hesapBean.update()}" value="Update" >
+                    <f:ajax execute="category-form" render="category-table category-form" />
+                </h:commandButton>
+                <h:commandButton styleClass="btn btn-secondary" rendered="#{hesapBean.entity.id!=0}" action="#{hesapBean.clear()}" value="Clear" >
+                    <f:ajax execute="category-form" render="category-form" />
+                </h:commandButton>
             </div>
         </h:form>
 
         <hr />
         <hr />
 
-        <h:form>        
+        <h:form id="category-table">        
             <h:dataTable styleClass="table table-striped table-hover" value="#{hesapBean.list}" var="c">
                 <h:column>
                     <f:facet name="Header">ID</f:facet>
@@ -50,8 +56,12 @@
                 </h:column>
                 <h:column>
                     <f:facet name="Header">Delette</f:facet>
-                    <h:commandButton styleClass="btn btn-danger btn-sm" action="#{hesapBean.delete(c)}" value="Sil"/>
-                    <h:commandButton styleClass="btn btn-primary btn-sm" action="#{hesapBean.setEntity(c)}" value="Update" />
+                    <h:commandButton styleClass="btn btn-danger btn-sm" action="#{hesapBean.delete(c)}" value="Sil">
+                        <f:ajax execute="category-table" render="category-table category-form" />
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-primary btn-sm" action="#{hesapBean.setEntity(c)}" value="Update" >
+                        <f:ajax execute="category-table" render="category-table category-form" />
+                    </h:commandButton>
                 </h:column>
             </h:dataTable>
         </h:form> 
