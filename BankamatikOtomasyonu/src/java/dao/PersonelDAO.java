@@ -47,7 +47,7 @@ public class PersonelDAO extends DBConnection {
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 System.out.println(rs.getLong("p_id"));
-                personelList.add(new Personel(rs.getLong("p_id"),rs.getString("p_ad"),rs.getString("p_soyad"),rs.getInt("p_yas"),rs.getString("p_hesapno"),rs.getString("p_sifre"),rs.getTimestamp("Created"),rs.getTimestamp("Updated")));
+                personelList.add(new Personel(rs.getLong("p_id"),rs.getString("p_ad"),rs.getString("p_soyad"),rs.getInt("p_yas"),rs.getString("p_sifre"),rs.getString("p_hesapno"),rs.getTimestamp("Created"),rs.getTimestamp("Updated")));
             }
 
         } catch (Exception ex) {

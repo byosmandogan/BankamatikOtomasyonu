@@ -15,34 +15,36 @@ public class Personel {
     private String p_ad;
     private String p_soyad;
     private Integer p_yas;
-    private String p_hesapno;
     private String p_sifre;
+    private String p_hesapno;
     private Timestamp created;
     private Timestamp updated;
 
     public Personel() {
     }
 
-    public Personel(Long p_id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String p_sifre, Timestamp created) {
+    public Personel(Long p_id, String p_ad, String p_soyad, Integer p_yas, String p_sifre, String p_hesapno, Timestamp created) {
         this.p_id = p_id;
         this.p_ad = p_ad;
         this.p_soyad = p_soyad;
         this.p_yas = p_yas;
-        this.p_hesapno = p_hesapno;
         this.p_sifre = p_sifre;
+        this.p_hesapno = p_hesapno;
         this.created = created;
     }
 
-    public Personel(Long p_id, String p_ad, String p_soyad, Integer p_yas, String p_hesapno, String p_sifre, Timestamp created, Timestamp updated) {
+    public Personel(Long p_id, String p_ad, String p_soyad, Integer p_yas, String p_sifre, String p_hesapno, Timestamp created, Timestamp updated) {
         this.p_id = p_id;
         this.p_ad = p_ad;
         this.p_soyad = p_soyad;
         this.p_yas = p_yas;
-        this.p_hesapno = p_hesapno;
         this.p_sifre = p_sifre;
+        this.p_hesapno = p_hesapno;
         this.created = created;
         this.updated = updated;
     }
+
+    
 
     public Long getP_id() {
         return p_id;
@@ -110,7 +112,7 @@ public class Personel {
 
     @Override
     public String toString() {
-        return "Personel{" + "id=" + p_id + ", p_ad=" + p_ad + ", p_soyad=" + p_soyad + ", p_yas=" + p_yas + ", p_hesapno=" + p_hesapno + ", sifre=" + p_sifre + ", created=" + created + ", updated=" + updated + '}';
+        return "Personel{" + "id=" + p_id + ", p_ad=" + p_ad + ", p_soyad=" + p_soyad + ", p_yas=" + p_yas + ", sifre=" + p_sifre + ", p_hesapno=" + p_hesapno + ", created=" + created + ", updated=" + updated + '}';
     }
     
     
