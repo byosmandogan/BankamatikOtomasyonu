@@ -11,6 +11,7 @@ import java.sql.Timestamp;
  * @author Onur
  */
 public class guncelle {
+
     private Long id;
     private String p_hesap_no;
     private String m_ad;
@@ -101,8 +102,5 @@ public class guncelle {
     public String toString() {
         return "guncelle{" + "id=" + id + ", p_hesap_no=" + p_hesap_no + ", m_ad=" + m_ad + ", m_soyad=" + m_soyad + ", m_sifre=" + m_sifre + ", created=" + created + ", updated=" + updated + '}';
     }
-    
-    
-    
-    
+
 }

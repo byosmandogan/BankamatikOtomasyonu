@@ -31,24 +31,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 </div>
 
                 <h:commandButton styleClass="btn btn-success" action="#{guncelleBean.create}" value="Kaydet">
-                    <f:ajax execute="category-g" render="category-t category-g" />
+                    <f:ajax execute="category-g" render="category-gg category-g" />
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-primary" action="#{guncelleBean.update()}" value="Update" >
-                    <f:ajax execute="category-g" render="category-t category-g" />
+                <h:commandButton styleClass="btn btn-primary" rendered="#{guncelleBean.entity.id!=1}" action="#{guncelleBean.update()}" value="Update" >
+                    <f:ajax execute="category-g" render="category-gg category-g" />
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-secondary" action="#{musteri.clear()}" value="Clear" >
+                <h:commandButton styleClass="btn btn-secondary" rendered="#{guncelleBean.entity.id!=0}" action="#{guncelleBean.clear()}" value="Clear" >
                     <f:ajax execute="category-g" render="category-g" />
                 </h:commandButton>
             </h:form>   
-            <h:form id="category-t">        
+            <h:form id="category-gg">        
 
-                <h:dataTable styleClass="table table-striped table-hover" value="#{guncelleBean.list}" var="c">                    <h:column>
+                <h:dataTable styleClass="table table-striped table-hover" value="#{guncelleBean.list}" var="c">               
+                    <h:column>
                         <f:facet name="Header">ID</f:facet>
                             #{c.id}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="Header">Hesap No</f:facet>
-                            #{c.p_hesap_no}
                     </h:column>
                     <h:column>
                         <f:facet name="Header">Ad</f:facet>
@@ -63,6 +60,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             #{c.m_sifre}
                     </h:column>
                     <h:column>
+                        <f:facet name="Header">Hesap No</f:facet>
+                            #{c.p_hesap_no}
+                    </h:column>
+                    <h:column>
                         <f:facet name="Header">CREATED</f:facet>
                             #{c.created}
                     </h:column>
@@ -72,8 +73,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     </h:column>
                     <h:column>
                         <f:facet name="Header">Delette</f:facet>
-                        <h:commandButton action="#{guncelleBean.delete(c)}" value="Sil"/>
-                        <h:commandButton action="#{guncelleBean.setEntity(c)}" value="Update" />
+                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{guncelleBean.delete(c)}" value="Sil">
+                            <f:ajax execute="category-gg" render="category-gg category-g" />
+                        </h:commandButton>
+                        <h:commandButton styleClass="btn btn-primary btn-sm" action="#{guncelleBean.setEntity(c)}" value="Update" >
+                            <f:ajax execute="category-gg" render="category-gg category-g" />
+                        </h:commandButton>
                     </h:column>
                 </h:dataTable> 
 

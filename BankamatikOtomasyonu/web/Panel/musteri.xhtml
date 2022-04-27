@@ -30,26 +30,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <h:inputText styleClass="form-control" value="#{musteriBean.entity.m_hesapno}"/>
                 </div>
 
-                <h:commandButton styleClass="btn btn-success" action="#{musteriBean.create}" value="Kaydet">
-                    <f:ajax execute="category-m" render="category-t category-m" />
+                <h:commandButton styleClass="btn btn-success"  value="Kaydet" action="#{musteriBean.create}">
+                    <f:ajax execute="category-m" render="category-mm category-m" />
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-primary" action="#{musteriBean.update()}" value="Update" >
-                    <f:ajax execute="category-m" render="category-t category-m" />
+                <h:commandButton styleClass="btn btn-primary" rendered="#{musteriBean.entity.m_id!=0}" action="#{musteriBean.update()}" value="Update" >
+                    <f:ajax execute="category-m" render="category-mm category-m" />
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-secondary" action="#{musteri.clear()}" value="Clear" >
+                <h:commandButton styleClass="btn btn-secondary" rendered="#{musteriBean.entity.m_id!=0}" action="#{musteriBean.clear()}" value="Clear" >
                     <f:ajax execute="category-m" render="category-m" />
                 </h:commandButton>
             </h:form>
-            <h:form id="category-t">        
+            <h:form id="category-mm">        
                 <h:dataTable styleClass="table table-striped table-hover" value="#{musteriBean.list}" var="c">
                     <h:column>
                         <f:facet name="Header">ID</f:facet>
                             #{c.m_id}
                     </h:column>
-                    <h:column>
-                        <f:facet name="Header">Hesap No</f:facet>
-                            #{c.m_hesapno}
-                    </h:column>
+
                     <h:column>
                         <f:facet name="Header">Ad</f:facet>
                             #{c.m_ad}
@@ -63,6 +60,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             #{c.m_sifre}
                     </h:column>
                     <h:column>
+                        <f:facet name="Header">Hesap No</f:facet>
+                            #{c.m_hesapno}
+                    </h:column>
+                    <h:column>
                         <f:facet name="Header">CREATED</f:facet>
                             #{c.created}
                     </h:column>
@@ -72,7 +73,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     </h:column>
                     <h:column>
                         <f:facet name="Header">Delette</f:facet>
-                        <h:commandButton action="#{musteriBean.delete(c)}" value="Sil"/>
+                        <h:commandButton styleClass="btn btn-danger btn-sm" action="#{musteriBean.delete(c)}" value="Sil">
+                            <f:ajax execute="category-mm" render="category-mm category-m" />
+                        </h:commandButton>
+                        <h:commandButton styleClass="btn btn-primary btn-sm" action="#{musteriBean.setEntity(c)}" value="Update" >
+                            <f:ajax execute="category-mm" render="category-mm category-m" />
+                        </h:commandButton>
+
 
                     </h:column>
                 </h:dataTable> 
