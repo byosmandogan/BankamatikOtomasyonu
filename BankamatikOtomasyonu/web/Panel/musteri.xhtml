@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml">
+    <ui:define name="content" >
+        <h:form>
+            <hr />
+            <h:form id="category-m">
+                <div class="mb-3">
+                    <label class="form-label">Musteri Adı:</label>
+                    <h:inputText styleClass="form-control" value="#{musteriBean.entity.m_ad}"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Musteri Soyad:</label>
+                    <h:inputText styleClass="form-control" value="#{musteriBean.entity.m_soyad}"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Musteri Sifre:</label>
+                    <h:inputText styleClass="form-control" value="#{musteriBean.entity.m_sifre}"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Hesap No:</label>
+                    <h:inputText styleClass="form-control" value="#{musteriBean.entity.m_hesapno}"/>
+                </div>
+
+                <h:commandButton styleClass="btn btn-success" action="#{musteriBean.create}" value="Kaydet">
+                    <f:ajax execute="category-m" render="category-t category-m" />
+                </h:commandButton>
+                <h:commandButton styleClass="btn btn-primary" action="#{musteriBean.update()}" value="Update" >
+                    <f:ajax execute="category-m" render="category-t category-m" />
+                </h:commandButton>
+                <h:commandButton styleClass="btn btn-secondary" action="#{musteri.clear()}" value="Clear" >
+                    <f:ajax execute="category-m" render="category-m" />
+                </h:commandButton>
+            </h:form>
+            <h:form id="category-t">        
+                <h:dataTable styleClass="table table-striped table-hover" value="#{musteriBean.list}" var="c">
+                    <h:column>
+                        <f:facet name="Header">ID</f:facet>
+                            #{c.m_id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Hesap No</f:facet>
+                            #{c.m_hesapno}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Ad</f:facet>
+                            #{c.m_ad}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Soyad</f:facet>
+                            #{c.m_soyad}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Sifre</f:facet>
+                            #{c.m_sifre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">CREATED</f:facet>
+                            #{c.created}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">UPDATED</f:facet>
+                            #{c.updated}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="Header">Delette</f:facet>
+                        <h:commandButton action="#{musteriBean.delete(c)}" value="Sil"/>
+
+                    </h:column>
+                </h:dataTable> 
+
+
+            </h:form>
+        </h:form>
+    </ui:define>
+</ui:composition>
