@@ -72,7 +72,7 @@ public class parayukleDAO extends DBConnection {
         try {
 
             Statement st = this.getDb().createStatement();
-            String query = "update parayukle set eklenen_miktar='" + c.getEklenen_miktar()+ "' where id=" + c.getId();
+            String query = "update parayukle set bakiye='" + c.getBakiye()+ "' where id=" + c.getId();
             st.execute(query);
         } catch (Exception e) {
             System.out.println(e.getMessage());

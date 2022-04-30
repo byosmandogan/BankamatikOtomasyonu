@@ -21,9 +21,24 @@ public class parayuklemakbuz {
     public parayuklemakbuz() {
     }
 
-    public parayuklemakbuz(long aLong, double aDouble, double aDouble0, double aDouble1, Timestamp timestamp, Timestamp timestamp0) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public parayuklemakbuz(Long id, Double bakiye, Double eklenen_para, Double guncel_bakiye, Timestamp created) {
+        this.id = id;
+        this.bakiye = bakiye;
+        this.eklenen_para = eklenen_para;
+        this.guncel_bakiye = guncel_bakiye;
+        this.created = created;
     }
+
+    public parayuklemakbuz(Long id, Double bakiye, Double eklenen_para, Double guncel_bakiye, Timestamp created, Timestamp updated) {
+        this.id = id;
+        this.bakiye = bakiye;
+        this.eklenen_para = eklenen_para;
+        this.guncel_bakiye = guncel_bakiye;
+        this.created = created;
+        this.updated = updated;
+    }
+
+    
 
     public Long getId() {
         return id;
