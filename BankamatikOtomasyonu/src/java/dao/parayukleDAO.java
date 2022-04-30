@@ -24,7 +24,9 @@ public class parayukleDAO extends DBConnection {
             
             Statement st = this.getDb().createStatement();
             String query = "insert into parayukle (hesapno,bakiye,eklenen_miktar,guncel_bakiye,created) values('"+c.getHesapno()+"','"+c.getBakiye()+"','"+c.getEklenen_miktar()+"','"+c.getGuncel_bakiye()+"','"+c.getCreated()+"')";
+            String query1="update parayukle set bakiye=guncel_bakiye";
             int r =st.executeUpdate(query);
+            int t=st.executeUpdate(query1);
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
