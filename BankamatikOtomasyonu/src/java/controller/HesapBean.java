@@ -8,6 +8,7 @@ import dao.HesapDAO;
 import entity.Hesap;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -20,9 +21,9 @@ import java.util.List;
 @SessionScoped
 public class HesapBean implements Serializable {
 
-    private Hesap entity;
-    private HesapDAO dao;
-    private List<Hesap> list ;
+    @NotBlank private Hesap entity;
+    @NotBlank private HesapDAO dao;
+    @NotBlank private List<Hesap> list ;
     /**
      * Creates a new instance of HesapBean
      */

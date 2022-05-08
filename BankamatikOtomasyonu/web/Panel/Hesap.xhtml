@@ -10,7 +10,10 @@
         <h:form id="category-form">
             <div class="mb-3">
                 <label class="form-label">Hesapno:</label>
-                <h:inputText styleClass="form-control" value="#{hesapBean.entity.hesapno}"/>
+                <h:inputText id="hesapno" styleClass="form-control" value="#{hesapBean.entity.hesapno}" validatorMessage="Hesap No 8 karakterden oluşmalıdır.">
+                    <f:validateLength maximum="8" minimum="8" />
+                </h:inputText>
+                <h:message for="hesapno" style="color: red" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Bakiye:</label>

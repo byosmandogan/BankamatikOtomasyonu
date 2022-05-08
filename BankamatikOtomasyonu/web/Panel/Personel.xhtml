@@ -18,7 +18,10 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Personel Yaş:</label>
-                <h:inputText styleClass="form-control" value="#{personelBean.entity.p_yas}"/>
+                <h:inputText id="yas" styleClass="form-control" value="#{personelBean.entity.p_yas}" validatorMessage="yaş 18 den küçük veya 45 den büyük olamaz">
+                    <f:validateLongRange minimum="18" maximum="45" />
+                </h:inputText>
+                <h:message for="yas" style="color: red" />
             </div> 
             <div class="mb-3">
                 <label class="form-label">Personel Sifre:</label>
@@ -26,7 +29,8 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Hesap No:</label>
-                <h:inputText styleClass="form-control" value="#{personelBean.entity.p_hesapno}"/>
+                <h:inputText id="phesapno" styleClass="form-control" value="#{personelBean.entity.p_hesapno}" />
+                <h:message for="phesapno" style="color: red" />
             </div>
             <div class="mb-3">
                 <h:commandButton styleClass="btn btn-success" action="#{personelBean.create}" value="Kaydet">
