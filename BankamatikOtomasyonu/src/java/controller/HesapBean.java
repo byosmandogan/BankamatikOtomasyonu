@@ -24,10 +24,53 @@ public class HesapBean implements Serializable {
     @NotBlank private Hesap entity;
     @NotBlank private HesapDAO dao;
     @NotBlank private List<Hesap> list ;
+    
+    
+    private int page=2;
+    private int pageSize=3;
+    private int pageCount;
+    
     /**
      * Creates a new instance of HesapBean
      */
     public HesapBean() {
+    }
+
+    public void next(){
+        if(this.page==this.getPageCount())
+            this.page=2;
+        else
+            this.page++;
+    }
+    public void previous(){
+        if(this.page==2)
+            this.page =this.getPageCount();
+        else
+            this.page--;
+    }
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount= (int) Math.ceil(this.getDao().count()/(double)pageSize);
+        this.pageCount = pageCount;
     }
 
     public Hesap getEntity() {
@@ -53,8 +96,7 @@ public class HesapBean implements Serializable {
     }
 
     public List<Hesap> getList() {
-        this.list= this.getDao().getHesapList();
-        System.out.println("list ....");
+        this.list= this.getDao().getHesapList(page,pageSize);
         for (int i = 0; i < this.list.size(); i++) {
             System.out.println(this.list.get(i).getId());
         }

@@ -36,6 +36,10 @@
         <hr />
 
         <h:form id="category-table">        
+            <div>
+                <h:commandButton action="#{hesapBean.previous()}" value="Previous" styleClass="btn btn-outline-dark" />
+                <h:commandButton action="#{hesapBean.next()}" value="Next" styleClass="btn btn-outline-dark" />
+            </div>
             <h:dataTable styleClass="table table-striped table-hover" value="#{hesapBean.list}" var="c">
                 <h:column>
                     <f:facet name="Header">ID</f:facet>

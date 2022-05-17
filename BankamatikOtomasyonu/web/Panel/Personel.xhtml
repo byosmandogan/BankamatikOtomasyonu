@@ -29,7 +29,9 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Hesap No:</label>
-                <h:inputText id="phesapno" styleClass="form-control" value="#{personelBean.entity.p_hesapno}" />
+                <h:inputText id="phesapno" styleClass="form-control" value="#{personelBean.entity.p_hesapno}" validatorMessage="Hesap No 8 karakterden oluşmalıdır.">
+                    <f:validateLength maximum="8" minimum="8" />
+                </h:inputText>
                 <h:message for="phesapno" style="color: red" />
             </div>
             <div class="mb-3">
