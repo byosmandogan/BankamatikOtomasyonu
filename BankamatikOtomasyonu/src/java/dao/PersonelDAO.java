@@ -38,11 +38,12 @@ public class PersonelDAO extends DBConnection {
             System.out.println(ex.getMessage());
         }
     }
-    public List<Personel> getPersonelList(){
+    public List<Personel> getPersonelList(int page,int pageSize){
         List<Personel> personelList =new ArrayList<>();
+        int start = (page-1)*pageSize;
         try {
             Statement st = this.getDb().createStatement();
-            String query ="select * from personel";
+            String query ="select * from personel order by p_id asc limit "+start+"offset "+pageSize;
             
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
@@ -54,6 +55,25 @@ public class PersonelDAO extends DBConnection {
             System.out.println(ex.getMessage());
         }
         return personelList;
+    }
+    
+    public int count(){
+        int count=0;
+        try {
+            Statement st = this.getDb().createStatement();
+            String query ="select count(p_id) as p_count from personel";
+            
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            count= rs.getInt("p_count");
+            while(rs.next()){
+                
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return count;
     }
 
     public Connection getDb() {

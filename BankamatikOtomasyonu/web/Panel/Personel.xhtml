@@ -50,7 +50,11 @@
         <hr />
         <hr />
 
-        <h:form id="category-table">        
+        <h:form id="category-table">   
+            <div>
+                <h:commandButton action="#{personelBean.previous()}" value="Previous" styleClass="btn btn-outline-dark" />
+                <h:commandButton action="#{personelBean.next()}" value="Next" styleClass="btn btn-outline-dark" />
+            </div>
             <h:dataTable styleClass="table table-striped table-hover" value="#{personelBean.list}" var="c">
                 <h:column>
                     <f:facet name="Header">ID</f:facet>
