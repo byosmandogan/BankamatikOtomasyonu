@@ -15,32 +15,47 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             <h:form id="category-m">
                 <div class="mb-3">
                     <label class="form-label">Musteri Adı:</label>
-                    <h:inputText styleClass="form-control" value="#{musteriBean.entity.m_ad}"/>
+                    <h:inputText id="M_ad" styleClass="form-control" value="#{musteriBean.entity.m_ad}" required="true" requiredMessage="Bu alan zorunludur">
+                    </h:inputText>
+                    <h:message for="M_ad" style="color:red; font-size:10pt;" /><br />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Musteri Soyad:</label>
-                    <h:inputText styleClass="form-control" value="#{musteriBean.entity.m_soyad}"/>
+                    <h:inputText id="M_soyad" styleClass="form-control" value="#{musteriBean.entity.m_soyad}" required="true" requiredMessage="Bu alan zorunludur">
+
+                    </h:inputText>
+                    <h:message for="M_soyad" style="color:red; font-size:10pt;" /><br />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Musteri Sifre:</label>
-                    <h:inputText styleClass="form-control" value="#{musteriBean.entity.m_sifre}"/>
+                    <h:inputText id="M_sifre" styleClass="form-control" value="#{musteriBean.entity.m_sifre}" validatorMessage="Şifre minimum 8 maximum 16 karakterden oluşmalıdır.">
+                        <f:validateLength maximum="16" minimum="8" />
+                    </h:inputText>
+                    <h:message for="M_sifre" style="color: red;font-size:10pt;" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Hesap No:</label>
-                    <h:inputText styleClass="form-control" value="#{musteriBean.entity.m_hesapno}"/>
+                    <h:inputText id="M_hesapno" styleClass="form-control" value="#{musteriBean.entity.m_hesapno}" validatorMessage="Hesap No 8 karakterden oluşmalıdır.">
+                        <f:validateLength maximum="8" minimum="8" />
+                    </h:inputText>
+                    <h:message for="M_hesapno" style="color: red; font-size:10pt;" />
                 </div>
 
-                <h:commandButton styleClass="btn btn-success"  value="Kaydet" action="#{musteriBean.create}">
-                    <f:ajax execute="category-m" render="category-mm category-m" />
+                <h:commandButton styleClass="btn btn-success" value="Kaydet" action="#{musteriBean.create}">
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-primary" rendered="#{musteriBean.entity.m_id!=0}" action="#{musteriBean.update()}" value="Update" >
-                    <f:ajax execute="category-m" render="category-mm category-m" />
+                <h:commandButton styleClass="btn btn-primary" action="#{musteriBean.update()}" value="Update" >
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-secondary" rendered="#{musteriBean.entity.m_id!=0}" action="#{musteriBean.clear()}" value="Clear" >
-                    <f:ajax execute="category-m" render="category-m" />
+                <h:commandButton styleClass="btn btn-secondary" action="#{musteriBean.clear()}" value="Clear" >
                 </h:commandButton>
             </h:form>
-            <h:form id="category-mm">        
+
+            <hr/>
+            <h:form id="category-mm">
+                <pre> Page #{musteriDAO.page} of #{musteriDAO.pageCount}</pre>
+                <div>
+                    <h:commandButton action="#{musteriBean.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                    <h:commandButton action="#{musteriBean.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                </div>
                 <h:dataTable styleClass="table table-striped table-hover" value="#{musteriBean.list}" var="c">
                     <h:column>
                         <f:facet name="Header">ID</f:facet>

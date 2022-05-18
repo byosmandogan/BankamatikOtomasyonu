@@ -39,11 +39,12 @@ public class musteriDAO extends DBConnection {
             System.out.println(ex.getMessage());
         }
     }
-    public List<musteri> getmusteriList(){
+    public List<musteri> getmusteriList(int page,int pageSize){
         List<musteri> musteriList =new ArrayList<>();
+        int start = (page-1)*pageSize;
         try {
             Statement st = this.getDb().createStatement();
-            String query ="select * from musteri";
+            String query ="select * from musteri order by m_id asc limit "+start+"offset "+pageSize;
             
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
@@ -56,6 +57,25 @@ public class musteriDAO extends DBConnection {
         }
         return musteriList;
     }
+        public int count(){
+        int count=0;
+        try {
+            Statement st = this.getDb().createStatement();
+            String query ="select count(m_id) as musteri_count from musteri";
+            
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            count= rs.getInt("musteri_count");
+            while(rs.next()){
+                
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return count;
+    }
+
 
     public Connection getDb() {
         if(this.db==null){
