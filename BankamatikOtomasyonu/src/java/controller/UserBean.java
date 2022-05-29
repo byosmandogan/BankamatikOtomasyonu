@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dao.UserDAO;
+import dao.UsrDAO;
 import entity.SystemUser;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
@@ -22,7 +22,7 @@ import java.util.List;
 public class UserBean implements Serializable {
 
     private SystemUser entity;
-    private UserDAO dao;
+    private UsrDAO dao;
     private List<SystemUser> list;
 
 
@@ -43,22 +43,18 @@ public class UserBean implements Serializable {
         this.entity = entity;
     }
 
-    public UserDAO getDao() {
+    public UsrDAO getDao() {
         if (this.dao == null) {
-            this.dao = new UserDAO();
+            this.dao = new UsrDAO();
         }
         return dao;
     }
 
-    public void setDao(UserDAO dao) {
+    public void setDao(UsrDAO dao) {
         this.dao = dao;
     }
 
     public List<SystemUser> getList() {
-//        this.list = this.getDao().getSystemUserList();
-//        for (int i = 0; i < this.list.size(); i++) {
-//            System.out.println(this.list.get(i).getId());
-//        }
         this.list=this.getDao().getSystemUserList();
         return list;
     }
