@@ -10,7 +10,7 @@
         <h:form id="category-form">
             <div class="mb-3"> 
                 <label class="form-label">Group</label>
-                <h:selectOneMenu value="#{userBean.entity.group}" converter="groupConverter" >
+                <h:selectOneMenu styleClass="form-select" value="#{userBean.entity.group}" converter="groupConverter" >
                 <f:selectItems value="#{groupBean.list}" var="g" itemLabel="#{g.gname}" itemValue="#{g}" />
                 </h:selectOneMenu>
             </div>
