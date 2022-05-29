@@ -69,7 +69,7 @@ public class HesapBean implements Serializable {
     }
 
     public void setPageCount(int pageCount) {
-        this.pageCount= (int) Math.ceil(this.getDao().count()/(double)pageSize);
+        this.pageCount= (int) Math.ceil(this.getDao().count()/(int)pageSize);
         this.pageCount = pageCount;
     }
 

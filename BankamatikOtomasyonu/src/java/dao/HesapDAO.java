@@ -44,7 +44,7 @@ public class HesapDAO extends DBConnection{
         int start = (page-1)*pageSize;
         try {
             Statement st = this.getDb().createStatement();
-            String query ="select * from hesap order by h_id asc limit "+start+"offset "+pageSize;
+            String query ="select * from hesap order by h_id asc limit "+start+" offset "+pageSize;
             
             ResultSet rs = st.executeQuery(query);
             
@@ -62,14 +62,12 @@ public class HesapDAO extends DBConnection{
         int count=0;
         try {
             Statement st = this.getDb().createStatement();
-            String query ="select count(id) as hesap_count from hesap";
+            String query ="select count(h_id) from hesap AS hesap_count";
             
             ResultSet rs = st.executeQuery(query);
             rs.next();
             count= rs.getInt("hesap_count");
-            while(rs.next()){
-                
-            }
+            
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

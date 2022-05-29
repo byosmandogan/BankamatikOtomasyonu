@@ -28,7 +28,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) sr;
         HttpServletResponse response = (HttpServletResponse) sr1;
         String url = request.getRequestURI();
-
+        
         HttpSession session = request.getSession();
 
         UserManager user = null;
@@ -39,17 +39,17 @@ public class LoginFilter implements Filter {
 
         if (user == null) {
             if (url.contains("logout") || url.contains("private")) {
-                response.sendRedirect(request.getContextPath() + "/login.xhtml");
+                response.sendRedirect(request.getContextPath() + "/Login/login.xhtml");
             } else {
                 fc.doFilter(sr, sr1);
             }
 
         } else {
             if (url.contains("register")) {
-                response.sendRedirect(request.getContextPath() + "/index.xhtml");
+                response.sendRedirect(request.getContextPath() + "/Login/index.xhtml");
             } else if ((url.contains("logout"))) {
                 session.invalidate();
-                response.sendRedirect(request.getContextPath() + "/login.xhtml");
+                response.sendRedirect(request.getContextPath() + "/Login/login.xhtml");
             } else {
                 fc.doFilter(sr, sr1);
             }
