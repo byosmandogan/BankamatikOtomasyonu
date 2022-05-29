@@ -20,13 +20,13 @@
                 <h:inputText styleClass="form-control" value="#{hesapBean.entity.bakiye}"/>
             </div>
             <div class="mb-3">
-                <h:commandButton styleClass="btn btn-success" action="#{hesapBean.create}" value="Kaydet">
-                <f:ajax execute="category-form" render="category-table category-form" />
-                </h:commandButton>
-                <h:commandButton styleClass="btn btn-primary" rendered="#{hesapBean.entity.id!=1}" action="#{hesapBean.update()}" value="Update" >
+                <h:commandButton styleClass="btn btn-success" rendered="#{hesapBean.entity.id==null}" action="#{hesapBean.create}" value="Kaydet">
                     <f:ajax execute="category-form" render="category-table category-form" />
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-secondary" rendered="#{hesapBean.entity.id!=0}" action="#{hesapBean.clear()}" value="Clear" >
+                <h:commandButton styleClass="btn btn-primary" rendered="#{hesapBean.entity.id!=null}" action="#{hesapBean.update()}" value="Update" >
+                    <f:ajax execute="category-form" render="category-table category-form" />
+                </h:commandButton>
+                <h:commandButton styleClass="btn btn-secondary" rendered="#{hesapBean.entity.id!=null}" action="#{hesapBean.clear()}" value="Clear" >
                     <f:ajax execute="category-form" render="category-form" />
                 </h:commandButton>
             </div>
@@ -40,10 +40,10 @@
                 <h:commandButton action="#{hesapBean.previous()}" value="Previous" styleClass="btn btn-outline-dark" />
                 <h:commandButton action="#{hesapBean.next()}" value="Next" styleClass="btn btn-outline-dark" />
             </div>
-            <h:dataTable styleClass="table table-striped table-hover" value="#{hesapBean.list}" var="c">
+            <h:dataTable styleClass="table table-striped table-hover" value="#{hesapBean.list}" var="c">         
                 <h:column>
                     <f:facet name="Header">ID</f:facet>
-                        #{c.id}
+                    <h:commandLink action="#{hesapBean.setEntity(c)}" value="#{c.id}" />               
                 </h:column>
                 <h:column>
                     <f:facet name="Header">Hesap No</f:facet>
