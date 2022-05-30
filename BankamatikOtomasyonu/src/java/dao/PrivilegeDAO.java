@@ -4,6 +4,7 @@
  */
 package dao;
 
+import entity.Privileges;
 import entity.SystemGroup;
 import util.DBConnection;
 import java.sql.Connection;
@@ -16,18 +17,20 @@ import java.util.List;
  *
  * @author byosmandogan
  */
-public class GroupDAO extends DBConnection {
+public class PrivilegeDAO extends DBConnection {
 
     private Connection db;
-    
-     public GroupDAO(){
-        
+    private GroupDAO gdao;
+
+    public PrivilegeDAO() {
+
     }
+    
     public SystemGroup getById(Long id){
         SystemGroup sg =null;
         try{
             Statement st = this.getDb().createStatement();
-            ResultSet rs = st.executeQuery("select * from systemgroup where id= "+id);
+            ResultSet rs = st.executeQuery("select * from systemgroup where id="+id);
             rs.next();
             sg = new SystemGroup(rs.getLong("id"), rs.getString("gname"), rs.getTimestamp("created"), rs.getTimestamp("updated"));
         }catch(Exception e){
@@ -35,56 +38,57 @@ public class GroupDAO extends DBConnection {
         }
         return sg;
     }
-    public void createSystemGroup(SystemGroup c) {
+
+    public void createPrivileges(Privileges c) {
         try {
 
             Statement st = this.getDb().createStatement();
-            String query = "insert into systemgroup(gname) values('"+c.getGname()+"')";
+            String query = "insert into privilege(sgroup,mname,icreate,iread,iupdate,idelete,ilist,irshow) values('" + c.getPgroup().getId()+ "','"+c.getMname()+"','" + c.isIcreate() + "','" + c.isIread() + "','" + c.isIupdate() + "','" + c.isIdelete() + "','" + c.isIlist() + "','" + c.isIrshow() + "')";
             int r = st.executeUpdate(query);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void update(SystemGroup c) {
+    public void update(Privileges c) {
         try {
 
             Statement st = this.getDb().createStatement();
-            String query = "update systemgroup set gname= " +c.getGname() + " where id= " + c.getId();
+            String query = "update privilege set mname='" + c.getMname() + "' where id=" + c.getId();
             st.execute(query);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void delete(SystemGroup c) {
+    public void delete(Privileges c) {
         try {
 
             Statement st = this.getDb().createStatement();
-            String query = "delete from systemgroup where id= "+c.getId();
+            String query = "delete from privilege where id=" + c.getId();
             int r = st.executeUpdate(query);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public List<SystemGroup> getSystemGroupList() {
-        List<SystemGroup> systemgroupList = new ArrayList<>();
+    public List<Privileges> getPrivilegesList() {
+        List<Privileges> privilegesList = new ArrayList<>();
         try {
             Statement st = this.getDb().createStatement();
-            String query = "select * from systemgroup";
+            String query = "select * from privilege";
 
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
-                System.out.println(rs.getLong("id"));
-                systemgroupList.add(new SystemGroup(rs.getLong("id"), rs.getString("gname"), rs.getTimestamp("created"), rs.getTimestamp("updated")));
+                SystemGroup g =this.getGdao().getById(rs.getLong("sgroup"));
+                privilegesList.add(new Privileges(rs.getLong("id"),g, rs.getString("mname"), rs.getBoolean("icreate"), rs.getBoolean("iread"), rs.getBoolean("iupdate"), rs.getBoolean("idelete"), rs.getBoolean("ilist"), rs.getBoolean("irshow")));
             }
 
-        } catch (Exception ex) {
+        } catch (Exception ex) { 
             System.out.println(ex.getMessage());
         }
-        return systemgroupList;
+        return privilegesList;
     }
 
     public Connection getDb() {
@@ -96,6 +100,17 @@ public class GroupDAO extends DBConnection {
 
     public void setDb(Connection db) {
         this.db = db;
+    }
+
+    public GroupDAO getGdao() {
+        if(this.gdao==null){
+            this.gdao =new GroupDAO();
+        }
+        return gdao;
+    }
+
+    public void setGdao(GroupDAO gdao) {
+        this.gdao = gdao;
     }
 
 }

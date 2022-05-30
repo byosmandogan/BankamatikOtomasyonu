@@ -37,6 +37,7 @@
 
         <h:form id="category-table">        
             <div>
+                <h3>Page Count: #{hesapBean.page}/#{hesapBean.pageCount}</h3>
                 <h:commandButton action="#{hesapBean.previous()}" value="Previous" styleClass="btn btn-outline-dark" />
                 <h:commandButton action="#{hesapBean.next()}" value="Next" styleClass="btn btn-outline-dark" />
             </div>

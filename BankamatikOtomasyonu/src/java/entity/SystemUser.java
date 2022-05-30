@@ -19,14 +19,15 @@ public class SystemUser implements Serializable{
     public SystemUser() {
     }
 
-    public SystemUser(Long id, String email, String pass, SystemGroup group) {
+    public SystemUser(Long id, SystemGroup group, String email, String pass) {
         this.id = id;
+        this.group = group;
         this.email = email;
         this.pass = pass;
-        this.group = group;
+        
     }
 
-    
+
     public Long getId() {
         return id;
     }

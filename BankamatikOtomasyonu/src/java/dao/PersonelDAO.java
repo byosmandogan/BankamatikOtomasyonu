@@ -38,12 +38,30 @@ public class PersonelDAO extends DBConnection {
             System.out.println(ex.getMessage());
         }
     }
-    public List<Personel> getPersonelList(int page,int pageSize){
+    public List<Personel> getPersonelList(){
         List<Personel> personelList =new ArrayList<>();
-        int start = (page-1)*pageSize;
+        
         try {
             Statement st = this.getDb().createStatement();
-            String query ="select * from personel order by p_id asc limit "+start+"offset "+pageSize;
+            String query ="select * from personel";
+            
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                System.out.println(rs.getLong("p_id"));
+                personelList.add(new Personel(rs.getLong("p_id"),rs.getString("p_ad"),rs.getString("p_soyad"),rs.getInt("p_yas"),rs.getString("p_sifre"),rs.getString("p_hesapno"),rs.getTimestamp("Created"),rs.getTimestamp("Updated")));
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return personelList;
+    }
+    public List<Personel> getPersonelList(int page){
+        List<Personel> personelList =new ArrayList<>();
+        int offset = (page-1)*3;
+        try {
+            Statement st = this.getDb().createStatement();
+            String query ="select * from personel p_id limit 3 offset "+offset;
             
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){

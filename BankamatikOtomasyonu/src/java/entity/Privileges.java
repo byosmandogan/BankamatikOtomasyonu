@@ -9,29 +9,50 @@ package entity;
  * @author byosmandogan
  */
 public class Privileges {
+
     private Long id;
+    private SystemGroup pgroup;
     private String mname;
     private boolean icreate;
     private boolean iread;
     private boolean iupdate;
     private boolean idelete;
+    private boolean ilist;
     private boolean irshow;
+    
 
     public Privileges() {
     }
 
-    public Privileges(Long id, String mname, boolean icreate, boolean iread, boolean iupdate, boolean idelete, boolean irshow) {
+    public Privileges(Long id, SystemGroup g, String mname, boolean icreate, boolean iread, boolean iupdate, boolean idelete, boolean ilist, boolean irshow) {
         this.id = id;
+        this.pgroup = g;
         this.mname = mname;
         this.icreate = icreate;
         this.iread = iread;
         this.iupdate = iupdate;
         this.idelete = idelete;
+        this.ilist = ilist;
         this.irshow = irshow;
+        
     }
 
-    
-    
+    public SystemGroup getPgroup() {
+        return pgroup;
+    }
+
+    public void setPgroup(SystemGroup pgroup) {
+        this.pgroup = pgroup;
+    }
+
+    public boolean isIlist() {
+        return ilist;
+    }
+
+    public void setIlist(boolean ilist) {
+        this.ilist = ilist;
+    }
+
     public Long getId() {
         return id;
     }
@@ -87,6 +108,5 @@ public class Privileges {
     public void setIrshow(boolean irshow) {
         this.irshow = irshow;
     }
-    
-    
+
 }

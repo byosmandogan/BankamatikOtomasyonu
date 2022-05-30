@@ -24,28 +24,16 @@ public class PersonelBean implements Serializable {
     private PersonelDAO dao;
     private List<Personel> list ;
     
-    private int page=2;
-    private int pageSize=2;
+    private int page=1;
     private int pageCount;
+
     /**
      * Creates a new instance of PersonelBean
      */
     public PersonelBean() {
     }
     
-    public void next(){
-        if(this.page==this.getPageCount())
-            this.page=2;
-        else
-            this.page++;
-    }
-    public void previous(){
-        if(this.page==2)
-            this.page =this.getPageCount();
-        else
-            this.page--;
-    }
-    public int getPage() {
+        public int getPage() {
         return page;
     }
 
@@ -53,21 +41,29 @@ public class PersonelBean implements Serializable {
         this.page = page;
     }
 
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
     public int getPageCount() {
+        List<Personel> gList =this.getDao().getPersonelList();
+        int size= gList.size();
+        pageCount =(int) Math.ceil(size-3);
         return pageCount;
     }
 
     public void setPageCount(int pageCount) {
-        this.pageCount= (int) Math.ceil(this.getDao().count()/(double)pageSize);
         this.pageCount = pageCount;
+    }
+    
+    public void previous(){
+        page--;
+        if(page<1){
+            page= this.getPageCount();
+        }
+    }
+    
+    public void next(){
+        page++;
+        if(page>this.getPageCount()){
+            page=1;
+        }
     }
 
     public Personel getEntity() {
@@ -93,7 +89,7 @@ public class PersonelBean implements Serializable {
     }
 
     public List<Personel> getList() {
-        this.list= this.getDao().getPersonelList(page,pageSize);
+        this.list= this.getDao().getPersonelList(page);
         for (int i = 0; i < this.list.size(); i++) {
             System.out.println(this.list.get(i).getP_id());
         }

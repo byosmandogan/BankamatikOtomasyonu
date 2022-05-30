@@ -4,8 +4,8 @@
  */
 package controller;
 
-import dao.GroupDAO;
-import entity.SystemGroup;
+import dao.PrivilegeDAO;
+import entity.Privileges;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.validation.constraints.NotBlank;
@@ -17,71 +17,72 @@ import java.util.List;
  *
  * @author byosmandogan
  */
-@Named(value = "groupBean")
+@Named(value = "privilegeBean")
 @SessionScoped
-public class GroupBean implements Serializable {
+public class PrivilegeBean implements Serializable {
 
-    private SystemGroup entity;
-    private GroupDAO dao;
-    private List<SystemGroup> list;
+    private Privileges entity;
+    private PrivilegeDAO dao;
+    private List<Privileges> list;
 
 
     /**
-     * Creates a new instance of SystemGroupBean
+     * Creates a new instance of PrivilegesBean
      */
-    public GroupBean() {
+    public PrivilegeBean() {
     }
 
-    public SystemGroup getEntity() {
+    public Privileges getEntity() {
         if (this.entity == null) {
-            this.entity = new SystemGroup();
+            this.entity = new Privileges();
         }
         return entity;
     }
 
-    public void setEntity(SystemGroup entity) {
+    public void setEntity(Privileges entity) {
         this.entity = entity;
     }
 
-    public GroupDAO getDao() {
+    public PrivilegeDAO getDao() {
         if (this.dao == null) {
-            this.dao = new GroupDAO();
+            this.dao = new PrivilegeDAO();
         }
         return dao;
     }
 
-    public void setDao(GroupDAO dao) {
+    public void setDao(PrivilegeDAO dao) {
         this.dao = dao;
     }
 
-    public List<SystemGroup> getList() {
-//        this.list = this.getDao().getSystemGroupList();
+    public List<Privileges> getList() {
+//        this.list = this.getDao().getPrivilegesList();
 //        for (int i = 0; i < this.list.size(); i++) {
 //            System.out.println(this.list.get(i).getId());
 //        }
-        this.list=this.getDao().getSystemGroupList();
+        this.list=this.getDao().getPrivilegesList();
         return list;
     }
 
-    public void setList(List<SystemGroup> list) {
+    public void setList(List<Privileges> list) {
         this.list = list;
     }
 
     public void create() {
-        this.getDao().createSystemGroup(entity);
-        this.entity = new SystemGroup();
+        this.getDao().createPrivileges(entity);
+        this.entity = new Privileges();
     }
 
-    public void delete(SystemGroup c) {
-        this.getDao().delete(c);
+    public void delete(Privileges c) {
+        this.getDao().delete(entity);
+        this.entity = new Privileges();
     }
 
     public void update() {
         this.getDao().update(entity);
-        entity = new SystemGroup();
+        entity = new Privileges();
     }
 
     public void clear() {
-        entity = new SystemGroup();
+        entity = new Privileges();
     }
 }

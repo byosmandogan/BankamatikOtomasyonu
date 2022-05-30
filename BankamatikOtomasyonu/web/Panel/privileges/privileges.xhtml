@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml">
+
+    <ui:define name="content">
+        <h:form id="category-form">
+            <div class="mb-3"> 
+                <label class="form-label">Group</label>
+                <h:selectOneMenu styleClass="form-select" value="#{privilegeBean.entity.pgroup}" converter="groupConverter" >
+                    <f:selectItems value="#{groupBean.list}" var="g" itemLabel="#{g.gname}" itemValue="#{g}" />
+                </h:selectOneMenu>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">MName</label>
+                <h:inputText styleClass="form-control" value="#{privilegeBean.entity.mname}" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Create</label>
+                <h:selectBooleanCheckbox value="#{privilegeBean.entity.icreate}" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Read</label>
+                <h:selectBooleanCheckbox value="#{privilegeBean.entity.iread}" />
+            </div><!-- comment -->
+            <div class="mb-3">
+                <label class="form-label">Update</label>
+                <h:selectBooleanCheckbox value="#{privilegeBean.entity.iupdate}" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Delete</label>
+                <h:selectBooleanCheckbox value="#{privilegeBean.entity.idelete}" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">List</label>
+                <h:selectBooleanCheckbox value="#{privilegeBean.entity.ilist}" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Show</label>
+                <h:selectBooleanCheckbox value="#{privilegeBean.entity.irshow}" />
+            </div>
+            <div class="mb-3">
+                <h:commandButton styleClass="btn btn-success" rendered="#{privilegeBean.entity.id==null}" action="#{privilegeBean.create}" value="Kaydet"/>
+                <h:commandButton styleClass="btn btn-primary" rendered="#{privilegeBean.entity.id!=null}" action="#{privilegeBean.update()}" value="Update" />
+                <h:commandButton styleClass="btn btn-secondary" rendered="#{privilegeBean.entity.id!=null}" action="#{privilegeBean.clear()}" value="Clear"/> 
+            </div>
+        </h:form>
+
+        <hr />
+        <hr />
+
+        <h:form id="category-table">        
+            <h:dataTable styleClass="table table-striped table-hover" value="#{privilegeBean.list}" var="c">         
+                <h:column>
+                    <f:facet name="Header">ID</f:facet>
+                        #{c.id}      
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Group</f:facet>
+                        #{c.pgroup.gname}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Module</f:facet>
+                    <h:commandLink action="#{privilegeBean.setEntity(c)}" value="#{c.mname}" />
+
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Create</f:facet>
+                        #{c.icreate}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Read</f:facet>
+                        #{c.iread}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Update</f:facet>
+                        #{c.iupdate}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">Delete</f:facet>
+                        #{c.idelete}
+                </h:column>
+                <h:column>
+                    <f:facet name="Header">List</f:facet>
+                        #{c.ilist}
+                </h:column><!-- comment -->
+                <h:column>
+                    <f:facet name="Header">Show</f:facet>
+                        #{c.irshow}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="Header">Delette</f:facet>
+                    <h:commandButton styleClass="btn btn-danger btn-sm" action="#{privilegeBean.delete(c)}" value="Sil">
+                        <f:ajax execute="category-table" render="category-table category-form" />
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-primary btn-sm" action="#{privilegeBean.setEntity(c)}" value="Update" >
+                        <f:ajax execute="category-table" render="category-table category-form" />
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form> 
+    </ui:define>
+</ui:composition>
+

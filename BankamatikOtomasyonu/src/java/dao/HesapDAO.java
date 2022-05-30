@@ -39,12 +39,31 @@ public class HesapDAO extends DBConnection{
             System.out.println(ex.getMessage());
         }
     }
-    public List<Hesap> getHesapList(int page, int pageSize){
+    public List<Hesap> getHesapList(){
         List<Hesap> hesapList =new ArrayList<>();
-        int start = (page-1)*pageSize;
+
         try {
             Statement st = this.getDb().createStatement();
-            String query ="select * from hesap order by h_id asc limit "+start+" offset "+pageSize;
+            String query ="select * from hesap";
+            
+            ResultSet rs = st.executeQuery(query);
+            
+            while(rs.next()){
+                System.out.println(rs.getLong("h_id"));
+                hesapList.add(new Hesap(rs.getLong("h_id"),rs.getInt("hesapno"),rs.getDouble("bakiye"),rs.getTimestamp("created"),rs.getTimestamp("updated")));
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return hesapList;
+    }
+    public List<Hesap> getHesapList(int page){
+        List<Hesap> hesapList =new ArrayList<>();
+        int offset = (page-1)*3;
+        try {
+            Statement st = this.getDb().createStatement();
+            String query ="select * from hesap h_id limit 3 offset "+offset;
             
             ResultSet rs = st.executeQuery(query);
             
