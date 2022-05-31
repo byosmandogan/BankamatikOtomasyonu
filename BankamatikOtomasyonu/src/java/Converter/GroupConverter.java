@@ -15,7 +15,7 @@ import jakarta.faces.convert.FacesConverter;
  *
  * @author byosmandogan
  */
-@FacesConverter(value= "groupConverter")
+@FacesConverter(value = "groupConverter")
 public class GroupConverter implements Converter {
 
     private GroupDAO gdao;

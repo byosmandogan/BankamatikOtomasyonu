@@ -68,7 +68,7 @@ public class SystemGroup implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj) {  //bura tamam
         if (this == obj) {
             return true;
         }

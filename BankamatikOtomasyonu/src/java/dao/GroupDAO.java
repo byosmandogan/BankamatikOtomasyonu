@@ -19,53 +19,21 @@ import java.util.List;
 public class GroupDAO extends DBConnection {
 
     private Connection db;
-    
-     public GroupDAO(){
-        
+
+    public GroupDAO() {
     }
-    public SystemGroup getById(Long id){
-        SystemGroup sg =null;
-        try{
+
+    public SystemGroup getById(Long id) {
+        SystemGroup sg = null;
+        try {
             Statement st = this.getDb().createStatement();
-            ResultSet rs = st.executeQuery("select * from systemgroup where id= "+id);
+            ResultSet rs = st.executeQuery("select * from systemgroup where id= " + id);
             rs.next();
             sg = new SystemGroup(rs.getLong("id"), rs.getString("gname"), rs.getTimestamp("created"), rs.getTimestamp("updated"));
-        }catch(Exception e){
-            System.out.println(e.getMessage() );
-        }
-        return sg;
-    }
-    public void createSystemGroup(SystemGroup c) {
-        try {
-
-            Statement st = this.getDb().createStatement();
-            String query = "insert into systemgroup(gname) values('"+c.getGname()+"')";
-            int r = st.executeUpdate(query);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    public void update(SystemGroup c) {
-        try {
-
-            Statement st = this.getDb().createStatement();
-            String query = "update systemgroup set gname= " +c.getGname() + " where id= " + c.getId();
-            st.execute(query);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public void delete(SystemGroup c) {
-        try {
-
-            Statement st = this.getDb().createStatement();
-            String query = "delete from systemgroup where id= "+c.getId();
-            int r = st.executeUpdate(query);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        return sg;
     }
 
     public List<SystemGroup> getSystemGroupList() {
@@ -85,6 +53,39 @@ public class GroupDAO extends DBConnection {
             System.out.println(ex.getMessage());
         }
         return systemgroupList;
+    }
+
+    public void createSystemGroup(SystemGroup c) {
+        try {
+
+            Statement st = this.getDb().createStatement();
+            String query = "insert into systemgroup(gname) values('" + c.getGname() + "')";
+            int r = st.executeUpdate(query);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(SystemGroup c) {
+        try {
+
+            Statement st = this.getDb().createStatement();
+            String query = "update systemgroup set gname= " + c.getGname() + " where id= " + c.getId();
+            st.execute(query);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void delete(SystemGroup c) {
+        try {
+
+            Statement st = this.getDb().createStatement();
+            String query = "delete from systemgroup where id= " + c.getId();
+            int r = st.executeUpdate(query);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public Connection getDb() {
