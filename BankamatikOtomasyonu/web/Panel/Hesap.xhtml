@@ -20,10 +20,10 @@
                 <h:inputText styleClass="form-control" value="#{hesapBean.entity.bakiye}"/>
             </div>
             <div class="mb-3">
-                <h:commandButton styleClass="btn btn-success" rendered="#{hesapBean.entity.id==null}" action="#{hesapBean.create}" value="Kaydet">
+                <h:commandButton styleClass="btn btn-success" rendered="#{hesapBean.entity.id==null and privilegeBean.getPrivileges(user.group,'Hesap').icreate}" action="#{hesapBean.create}" value="Kaydet">
                     <f:ajax execute="category-form" render="category-table category-form" />
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-primary" rendered="#{hesapBean.entity.id!=null}" action="#{hesapBean.update()}" value="Update" >
+                <h:commandButton styleClass="btn btn-primary" rendered="#{hesapBean.entity.id!=null and privilegeBean.getPrivileges(user.group,'Hesap').iupdate}" action="#{hesapBean.update()}" value="Update" >
                     <f:ajax execute="category-form" render="category-table category-form" />
                 </h:commandButton>
                 <h:commandButton styleClass="btn btn-secondary" rendered="#{hesapBean.entity.id!=null}" action="#{hesapBean.clear()}" value="Clear" >
@@ -35,7 +35,7 @@
         <hr />
         <hr />
 
-        <h:form id="category-table">        
+        <h:form rendered="#{privilegeBean.getPrivileges(user.group,'Hesap').icreate or privilegeBean.getPrivileges(user.group,'Hesap').iupdate or privilegeBean.getPrivileges(user.group,'Hesap').idelete}" id="category-table" >    
             <div>
                 <h3>Page Count: #{hesapBean.page}/#{hesapBean.pageCount}</h3>
                 <h:commandButton action="#{hesapBean.previous()}" value="Previous" styleClass="btn btn-outline-dark" />
@@ -64,7 +64,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="Header">Delette</f:facet>
-                    <h:commandButton styleClass="btn btn-danger btn-sm" action="#{hesapBean.delete(c)}" value="Sil">
+                    <h:commandButton rendered="#{privilegeBean.getPrivileges(user.group,'Hesap').idelete}" styleClass="btn btn-danger btn-sm" action="#{hesapBean.delete(c)}" value="Sil">
                         <f:ajax execute="category-table" render="category-table category-form" />
                     </h:commandButton>
                     <h:commandButton styleClass="btn btn-primary btn-sm" action="#{hesapBean.setEntity(c)}" value="Update" >

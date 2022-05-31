@@ -4,61 +4,73 @@
  */
 package dao;
 
-import dao.GroupDAO;
 import entity.SystemGroup;
 import entity.SystemUser;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import util.DBConnection2;
 
 /**
  *
- * @author byosmandogan
+ * @author Mustafa
  */
-public class UserDAO {
+public class UserDAO extends DBConnection2 {
 
-    private Connection db;
     private GroupDAO gdao;
 
-
-
-    
-    public void createSystemUser(SystemUser c) {
+    public SystemUser getUser(String email, String pass) {
+        SystemUser u = null;
         try {
-            Statement st = this.getDb().createStatement();
-            String query = "insert into systemuser(email,pass,ugroup) values('" + c.getEmail() + "','" + c.getPass() + "','" + c.getGroup() + "')";
-            int r = st.executeUpdate(query);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            Statement st = this.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select*from systemuser where email= '" + email + "'and pass= '" + pass + "'");
+            rs.next();
 
+            SystemGroup g = this.getGdao().getById(rs.getLong("ugroup"));
+
+            u = new SystemUser(rs.getLong("id"), rs.getString("email"), rs.getString("pass"), g);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-
+        return u;
     }
 
-    public List<SystemUser> getSystemUserList() {
-        List<SystemUser> systemgroupList = new ArrayList<>();
-        try {
-            Statement st = this.getDb().createStatement();
-            String query = "select * from systemuser ";
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                SystemGroup g = this.getGdao().getById(rs.getLong("ugroup"));
-                systemgroupList.add(new SystemUser(rs.getLong("id"), g, rs.getString("email"), rs.getString("pass")));
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+    public List<SystemUser> readList() {
+        List<SystemUser> list = new ArrayList<>();
 
-        return systemgroupList;
+        try {
+            Statement st = this.getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select*from systemuser");
+            while (rs.next()) {
+
+                SystemGroup g = this.getGdao().getById(rs.getLong("ugroup"));
+
+                list.add(new SystemUser(rs.getLong("id"), rs.getString("email"), rs.getString("pass"), g));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    public void create(SystemUser c) {
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("insert into systemuser(email, pass, ugroup) values ('" + c.getEmail() + "','" + c.getPass() + "','" + c.getGroup().getId() + "')");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void update(SystemUser c) {
         try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("update systemuser set pass='" + c.getPass() + "', ugroup= " + c.getGroup().getId() + " where id=" + c.getId());
 
-            Statement st = this.getDb().createStatement();
-            String query = "update systemuser set pass='" + c.getPass() + "', ugroup=" + c.getGroup().getId() + " where id=" + c.getId();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -66,43 +78,12 @@ public class UserDAO {
 
     public void delete(SystemUser c) {
         try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("delete from systemuser where id= " + c.getId());
 
-            Statement st = this.getDb().createStatement();
-            String query = "delete from systemuser where id= " + c.getId();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
- /*   public List<SystemUser> getSystemUserList() {
-        List<SystemUser> systemgroupList = new ArrayList<>();
-        try {
-            Statement st = this.getDb().createStatement();
-            String query = "select * from systemuser ";
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                SystemGroup g = this.getGdao().getById(rs.getLong("ugroup"));
-                systemgroupList.add(new SystemUser(rs.getLong("id"), g, rs.getString("email"), rs.getString("pass")));
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return systemgroupList;
-    }
-*/
-
-    public UserDAO() {
-    }
-
-
-
-    public Connection getDb() {
-        return db;
-    }
-
-    public void setDb(Connection db) {
-        this.db = db;
     }
 
     public GroupDAO getGdao() {
@@ -111,8 +92,6 @@ public class UserDAO {
         }
         return gdao;
     }
- 
-
 
     public void setGdao(GroupDAO gdao) {
         this.gdao = gdao;

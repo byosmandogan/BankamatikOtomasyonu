@@ -24,6 +24,8 @@ public class GroupBean implements Serializable {
     private SystemGroup entity;
     private GroupDAO dao;
     private List<SystemGroup> list;
+    
+
 
 
     /**

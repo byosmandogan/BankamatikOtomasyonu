@@ -20,7 +20,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Pass</label>
-                <h:inputSecret styleClass="form-control" value="#{userBean.entity.pass}" />
+                <h:inputText styleClass="form-control" value="#{userBean.entity.pass}" />
             </div>
             <div class="mb-3">
                 <h:commandButton styleClass="btn btn-success" rendered="#{userBean.entity.id==null}" action="#{userBean.create}" value="Kaydet"/>
@@ -50,12 +50,8 @@
 
                 <h:column>
                     <f:facet name="Header">Delette</f:facet>
-                    <h:commandButton styleClass="btn btn-danger btn-sm" action="#{userBean.delete(c)}" value="Sil">
-                        <f:ajax execute="category-table" render="category-table category-form" />
-                    </h:commandButton>
-                    <h:commandButton styleClass="btn btn-primary btn-sm" action="#{userBean.setEntity(c)}" value="Update" >
-                        <f:ajax execute="category-table" render="category-table category-form" />
-                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-danger btn-sm" action="#{userBean.delete(c)}" value="Sil"/>
+                    <h:commandButton styleClass="btn btn-primary btn-sm" action="#{userBean.setEntity(c)}" value="Update" />
                 </h:column>
             </h:dataTable>
         </h:form> 

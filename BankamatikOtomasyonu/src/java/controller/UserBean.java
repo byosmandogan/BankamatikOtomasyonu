@@ -1,35 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package controller;
 
 import dao.UserDAO;
 import entity.SystemUser;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.List;
 
-/**
- *
- * @author byosmandogan
- */
-@Named(value = "userBean")
+@Named(value="userBean")
 @SessionScoped
+
 public class UserBean implements Serializable {
 
     private SystemUser entity;
     private UserDAO dao;
     private List<SystemUser> list;
 
+    public void clearForm() {
+        this.entity = new SystemUser();
+    }
 
-    /**
-     * Creates a new instance of SystemUserBean
-     */
-    public UserBean() {
+    public void create() {
+        this.getDao().create(entity);
+        this.entity = new SystemUser();
+    }
+
+    public void update() {
+        this.getDao().update(entity);
+        this.entity = new SystemUser();
+    }
+
+    public void delete(SystemUser c) {
+        this.getDao().delete(c);
+        this.entity = new SystemUser();
     }
 
     public SystemUser getEntity() {
@@ -55,7 +58,7 @@ public class UserBean implements Serializable {
     }
 
     public List<SystemUser> getList() {
-        this.list=this.getDao().getSystemUserList();
+        this.list = this.getDao().readList();
         return list;
     }
 
@@ -63,22 +66,4 @@ public class UserBean implements Serializable {
         this.list = list;
     }
 
-    public void create() {
-        this.getDao().createSystemUser(entity);
-        this.entity = new SystemUser();
-    }
-
-    public void delete(SystemUser c) {
-        this.getDao().delete(entity);
-        this.entity = new SystemUser();
-    }
-
-    public void update() {
-        this.getDao().update(entity);
-        entity = new SystemUser();
-    }
-
-    public void clear() {
-        entity = new SystemUser();
-    }
 }

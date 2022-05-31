@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 /**
  *
- * @author byosmandogan
+ * @author Mustafa
  */
-public class SystemUser implements Serializable{
+public class SystemUser implements Serializable {
     private Long id;
     private String email;
     private String pass;
@@ -19,14 +19,12 @@ public class SystemUser implements Serializable{
     public SystemUser() {
     }
 
-    public SystemUser(Long id, SystemGroup group, String email, String pass) {
+    public SystemUser(Long id, String email, String pass, SystemGroup group) {
         this.id = id;
-        this.group = group;
         this.email = email;
         this.pass = pass;
-        
+        this.group = group;
     }
-
 
     public Long getId() {
         return id;
@@ -59,5 +57,5 @@ public class SystemUser implements Serializable{
     public void setGroup(SystemGroup group) {
         this.group = group;
     }
-    
+      
 }
