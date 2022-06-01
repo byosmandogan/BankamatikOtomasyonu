@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 
 /**
  *
- * @author Mustafa
+ * @author byosmandogan
  */
 public abstract class DBConnection2 {
 
@@ -29,5 +29,8 @@ public abstract class DBConnection2 {
         return connection;
 
     }
-
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+    
 }
