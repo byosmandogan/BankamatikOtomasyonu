@@ -12,7 +12,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
     <ui:define name="content" >
         <h:form>
             <hr />
-            <h:form id="category-m">
+            <h:form id="category-form">
                 <div class="mb-3">
                     <label class="form-label">Musteri Adı:</label>
                     <h:inputText id="M_ad" styleClass="form-control" value="#{musteriBean.entity.m_ad}" required="true" requiredMessage="Bu alan zorunludur">
@@ -41,20 +41,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <h:message for="M_hesapno" style="color: red; font-size:10pt;" />
                 </div>
 
-                <h:commandButton styleClass="btn btn-success" value="Kaydet" action="#{musteriBean.create}">
+                <h:commandButton styleClass="btn btn-success" rendered="#{musteriBean.entity.m_id==null}" action="#{musteriBean.create}"  value="Kaydet"  >
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-primary" action="#{musteriBean.update()}" value="Update" >
+                <h:commandButton styleClass="btn btn-primary" rendered="#{musteriBean.entity.m_id=null}" action="#{musteriBean.update()}" value="Update" >
                 </h:commandButton>
-                <h:commandButton styleClass="btn btn-secondary" action="#{musteriBean.clear()}" value="Clear" >
+                <h:commandButton styleClass="btn btn-secondary" rendered="#{musteriBean.entity.m_id=null}" action="#{musteriBean.clear()}" value="Clear" >
+
                 </h:commandButton>
             </h:form>
 
             <hr/>
-            <h:form id="category-mm">
-                <pre> Page #{musteriDAO.page} of #{musteriDAO.pageCount}</pre>
+            <h:form id="category-table">
+                <pre> Page #{musteriBean.page} of #{musteriBean.pageCount}</pre>
                 <div>
-                    <h:commandButton action="#{musteriBean.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
-                    <h:commandButton action="#{musteriBean.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
+                    <h:commandButton  action="#{musteriBean.previous()}" value="Önceki Sayfa" styleClass="btn btn-outline-dark" />
+                    <h:commandButton  action="#{musteriBean.next()}" value="Sonraki Sayfa" styleClass="btn btn-outline-dark" />
                 </div>
                 <h:dataTable styleClass="table table-striped table-hover" value="#{musteriBean.list}" var="c">
                     <h:column>
@@ -89,10 +90,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <h:column>
                         <f:facet name="Header">Delette</f:facet>
                         <h:commandButton styleClass="btn btn-danger btn-sm" action="#{musteriBean.delete(c)}" value="Sil">
-                            <f:ajax execute="category-mm" render="category-mm category-m" />
+                            <f:ajax execute="category-table" render="category-table category-form" />
                         </h:commandButton>
                         <h:commandButton styleClass="btn btn-primary btn-sm" action="#{musteriBean.setEntity(c)}" value="Update" >
-                            <f:ajax execute="category-mm" render="category-mm category-m" />
+                            <f:ajax  execute="category-table" render="category-table category-form" />
                         </h:commandButton>
 
 

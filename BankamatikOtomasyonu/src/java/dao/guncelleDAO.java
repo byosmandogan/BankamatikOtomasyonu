@@ -48,8 +48,9 @@ public class guncelleDAO extends DBConnection{
             System.out.println(e.getMessage());
         }
     }
-    public List<guncelle> getguncelleList(){
+        public List<guncelle> getguncelleList(){
         List<guncelle> guncelleList =new ArrayList<>();
+        
         try {
             Statement st = this.getDb().createStatement();
             String query ="select * from guncelle";
@@ -65,6 +66,44 @@ public class guncelleDAO extends DBConnection{
         }
         return guncelleList;
     }
+    
+    
+    public List<guncelle> getguncelleList(int page){
+        List<guncelle> guncelleList =new ArrayList<>();
+        int offset = (page-1)*3;
+
+        try {
+            Statement st = this.getDb().createStatement();
+            String query ="select * from guncelle id limit 3 offset "+offset;
+            
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                System.out.println(rs.getLong("id"));
+                guncelleList.add(new guncelle(rs.getLong("id"),rs.getString("p_hesapno"),rs.getString("m_ad"),rs.getString("m_soyad"),rs.getString("m_sifre"),rs.getTimestamp("created"),rs.getTimestamp("updated")));
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return guncelleList;
+    }
+        public int count(){
+        int count=0;
+        try {
+            Statement st = this.getDb().createStatement();
+            String query ="select count(id) as g_count from guncelle";
+            
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            count= rs.getInt("g_count");
+            
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return count;
+    }
+
 
     public Connection getDb() {
         if(this.db==null){

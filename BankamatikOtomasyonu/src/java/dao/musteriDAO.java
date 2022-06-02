@@ -12,44 +12,47 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-
 /**
  *
  * @author Onur
  */
 public class musteriDAO extends DBConnection {
+
     private Connection db;
-     public void createmusteri(musteri c){
+
+    public void createmusteri(musteri c) {
         try {
-            
+
             Statement st = this.getDb().createStatement();
-            String query = "insert into musteri (m_ad,m_soyad,m_sifre,m_hesapno,created) values('"+c.getM_ad()+"','"+c.getM_soyad()+"','"+c.getM_sifre()+"','"+c.getM_hesapno()+"','"+c.getCreated()+"')";
-            int r =st.executeUpdate(query);
-        }catch (Exception ex) {
+            String query = "insert into musteri (m_ad,m_soyad,m_sifre,m_hesapno,created) values('" + c.getM_ad() + "','" + c.getM_soyad() + "','" + c.getM_sifre() + "','" + c.getM_hesapno() + "','" + c.getCreated() + "')";
+            int r = st.executeUpdate(query);
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
-    public void delete(musteri c){
+
+    public void delete(musteri c) {
         try {
-            
+
             Statement st = this.getDb().createStatement();
-            String query = "delete from musteri where id="+c.getM_id();
-            int r =st.executeUpdate(query);
-        }catch (Exception ex) {
+            String query = "delete from musteri where id=" + c.getM_id();
+            int r = st.executeUpdate(query);
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
-    public List<musteri> getmusteriList(int page,int pageSize){
-        List<musteri> musteriList =new ArrayList<>();
-        int start = (page-1)*pageSize;
+
+    public List<musteri> getmusteriList() {
+        List<musteri> musteriList = new ArrayList<>();
+
         try {
             Statement st = this.getDb().createStatement();
-            String query ="select * from musteri order by m_id asc limit "+start+"offset "+pageSize;
-            
+            String query = "select * from musteri";
+
             ResultSet rs = st.executeQuery(query);
-            while(rs.next()){
+            while (rs.next()) {
                 System.out.println(rs.getLong("m_id"));
-                musteriList.add(new musteri(rs.getLong("m_id"),rs.getString("m_ad"),rs.getString("m_soyad"),rs.getString("m_sifre"),rs.getString("m_hesapno"),rs.getTimestamp("created"),rs.getTimestamp("updated")));
+                musteriList.add(new musteri(rs.getLong("m_id"), rs.getString("m_ad"), rs.getString("m_soyad"), rs.getString("m_sifre"), rs.getString("m_hesapno"), rs.getTimestamp("created"), rs.getTimestamp("updated")));
             }
 
         } catch (Exception ex) {
@@ -57,17 +60,37 @@ public class musteriDAO extends DBConnection {
         }
         return musteriList;
     }
-        public int count(){
-        int count=0;
+
+    public List<musteri> getmusteriList(int page) {
+        List<musteri> musteriList = new ArrayList<>();
+        int offset = (page - 1) * 3;
         try {
             Statement st = this.getDb().createStatement();
-            String query ="select count(m_id) as musteri_count from musteri";
-            
+            String query = "select * from musteri m_id limit 3 offset " + offset;
+
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                System.out.println(rs.getLong("m_id"));
+                musteriList.add(new musteri(rs.getLong("m_id"), rs.getString("m_ad"), rs.getString("m_soyad"), rs.getString("m_sifre"), rs.getString("m_hesapno"), rs.getTimestamp("created"), rs.getTimestamp("updated")));
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return musteriList;
+    }
+
+    public int count() {
+        int count = 0;
+        try {
+            Statement st = this.getDb().createStatement();
+            String query = "select count(m_id) as musteri_count from musteri";
+
             ResultSet rs = st.executeQuery(query);
             rs.next();
-            count= rs.getInt("musteri_count");
-            while(rs.next()){
-                
+            count = rs.getInt("musteri_count");
+            while (rs.next()) {
+
             }
 
         } catch (Exception ex) {
@@ -76,10 +99,9 @@ public class musteriDAO extends DBConnection {
         return count;
     }
 
-
     public Connection getDb() {
-        if(this.db==null){
-            this.db=this.connect();
+        if (this.db == null) {
+            this.db = this.connect();
         }
         return db;
     }
@@ -87,11 +109,12 @@ public class musteriDAO extends DBConnection {
     public void setDb(java.sql.Connection db) {
         this.db = db;
     }
+
     public void update(musteri c) {
         try {
 
             Statement st = this.getDb().createStatement();
-            String query = "update musteri set m_sifre='" + c.getM_sifre()+ "' where m_id=" + c.getM_id();
+            String query = "update musteri set m_sifre='" + c.getM_sifre() + "' where m_id=" + c.getM_id();
             st.execute(query);
         } catch (Exception e) {
             System.out.println(e.getMessage());

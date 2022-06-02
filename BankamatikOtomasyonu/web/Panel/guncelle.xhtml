@@ -11,8 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 template="/template.xhtml">
     <ui:define name="content" >
         <h:form>
-            <hr />
-            <h:form id="category-g">
+            <h:form id="category-form">
                 <div class="mb-3">
                     <label class="form-label">Şirket Ortak Adı:</label>
                     <h:inputText styleClass="form-control" value="#{guncelleBean.entity.m_ad}"/>
@@ -29,18 +28,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <label class="form-label">Şirket Ortak Hesap No:</label>
                     <h:inputText styleClass="form-control" value="#{guncelleBean.entity.p_hesap_no}"/>
                 </div>
+                <div class="mb-3">
+                    <h:commandButton styleClass="btn btn-success" action="#{guncelleBean.create}" value="Kaydet">
+                        <f:ajax execute="category-form" render="category-table category-form" />
 
-                <h:commandButton styleClass="btn btn-success" action="#{guncelleBean.create}" value="Kaydet">
-                    <f:ajax execute="category-g" render="category-gg category-g" />
-                </h:commandButton>
-                <h:commandButton styleClass="btn btn-primary" rendered="#{guncelleBean.entity.id!=1}" action="#{guncelleBean.update()}" value="Update" >
-                    <f:ajax execute="category-g" render="category-gg category-g" />
-                </h:commandButton>
-                <h:commandButton styleClass="btn btn-secondary" rendered="#{guncelleBean.entity.id!=0}" action="#{guncelleBean.clear()}" value="Clear" >
-                    <f:ajax execute="category-g" render="category-g" />
-                </h:commandButton>
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-primary"  action="#{guncelleBean.update()}" value="Update" >
+                        <f:ajax execute="category-form" render="category-table category-form" />
+                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-secondary" action="#{guncelleBean.clear()}" value="Clear" >
+                        <f:ajax execute="category-form" render="category-form" />
+                    </h:commandButton>
+                </div>
             </h:form>   
-            <h:form id="category-gg">        
+
+
+            <tr>  
+                <h3> Page #{guncelleBean.page} of #{guncelleBean.pageCount}</h3>
+                <tfoot>
+                    <h:commandButton styleClass="btn btn-outline-dark"   action="#{guncelleBean.previous()}" value="Previous" />
+                    <h:commandButton styleClass="btn btn-outline-dark"   action="#{guncelleBean.next()}" value="Next" />
+                </tfoot>
+            </tr>
+
+            <h:form id="category-table">        
 
                 <h:dataTable styleClass="table table-striped table-hover" value="#{guncelleBean.list}" var="c">               
                     <h:column>
@@ -74,10 +85,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <h:column>
                         <f:facet name="Header">Delette</f:facet>
                         <h:commandButton styleClass="btn btn-danger btn-sm" action="#{guncelleBean.delete(c)}" value="Sil">
-                            <f:ajax execute="category-gg" render="category-gg category-g" />
+                            <f:ajax execute="category-table" render="category-table category-form" />
+
                         </h:commandButton>
+
                         <h:commandButton styleClass="btn btn-primary btn-sm" action="#{guncelleBean.setEntity(c)}" value="Update" >
-                            <f:ajax execute="category-gg" render="category-gg category-g" />
+                            <f:ajax execute="category-table" render="category-table category-form" />
+
                         </h:commandButton>
                     </h:column>
                 </h:dataTable> 
